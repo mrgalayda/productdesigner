@@ -1,0 +1,46 @@
+* {
+	outline: none;
+}
+html{
+
+}
+body{
+	font-family: "favoriteThin";
+}
+h2,h3,h4,h5,h6{
+	font-family: "favoriteBold";
+
+}
+button, .button, .btn{
+	font-family: "favoriteBold";
+	text-transform: uppercase;
+	font-size: 14px;
+} 
+p{
+	font-family: "favoriteLight";
+	color: $black;
+}
+h1{
+	font-family: "favoriteBold";
+	color: $black;
+
+}
+h2{
+
+}
+h3{
+
+}
+h4{
+
+}
+h5{
+
+}
+h6{
+
+}
+
+body .no-padding{
+	padding: 0;
+}

@@ -1,0 +1,17 @@
+$blue: #0090ff;
+$royal: #080c1e;
+$red: #ff0042;
+$black: #080808;
+
+
+$brand-font: "arial";
+
+$butter: all .5s linear;
+
+%vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
