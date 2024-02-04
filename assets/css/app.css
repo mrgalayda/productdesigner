@@ -15309,7 +15309,7 @@ header.banner {
     z-index: 1; }
   @media only screen and (min-width: 64.063em) {
     header.banner .atom-wrap {
-      width: 550px;
+      width: 600px;
       margin: 0 auto; } }
   header.banner h1 {
     font-size: 72px;
