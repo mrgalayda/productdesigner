@@ -15350,5 +15350,25 @@ main article {
   height: 100vh;
   padding: 10vw;
   text-align: center; }
+.bio{
+max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  
+}
+.bio p{
 
+  
+}
+.bio h2{
+font-size: 22px;
+font-family: sans-serif;
+  
+}
+.bio h3{
+font-size: 18px;
+font-family: sans-serif;
+
+  
+}
 /*# sourceMappingURL=app.css.map */
