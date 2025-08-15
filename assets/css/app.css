@@ -15295,7 +15295,7 @@ a#worklink {
   bottom: 100px; }
 
 header.banner {
-  height: 80vh;
+  height: calc(80vh + 150px);
   width: 100vw;
   transform: translate(0, 400px);
   padding: 10vw;
@@ -15303,7 +15303,7 @@ header.banner {
 }
   @media only screen and (min-width: 64.063em) {
     body#home header.banner {
-      height: calc(80vh + 150px);
+        height: 80vh;
     }
   }
 
