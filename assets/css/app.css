@@ -15274,7 +15274,7 @@ a.btn {
   text-transform: capitalize; }
   @media only screen and (min-width: 64.063em) {
     a.btn {
-      margin: 0 auto;
+      margin: 0;
       width: 200px;
       text-align: center;
       float: none;
@@ -15318,14 +15318,14 @@ header.banner {
     @media only screen and (min-width: 64.063em) {
       header.banner h1 {
         font-size: 72px;
-        text-align: center;
+        text-align: left;
         line-height: 80px; } }
   header.banner p {
     font-size: 20px;
     padding-bottom: 25px; }
     @media only screen and (min-width: 64.063em) {
       header.banner p {
-        text-align: center;
+        text-align: left;
         font-size: 22px;
         padding: 10px; } }
     header.banner p em {
