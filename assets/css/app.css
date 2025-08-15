@@ -15314,6 +15314,7 @@ header.banner {
   header.banner h1 {
     font-size: 72px;
     line-height: 80px;
+            text-align: left;
     color: #080c1e; }
     @media only screen and (min-width: 64.063em) {
       header.banner h1 {
