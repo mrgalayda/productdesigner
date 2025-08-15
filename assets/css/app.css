@@ -15299,7 +15299,13 @@ header.banner {
   width: 100vw;
   transform: translate(0, 400px);
   padding: 10vw;
+
   opacity: 0; }
+  @media only screen and (min-width: 64.063em) {
+    header.banner {
+      height: calc(80vh + 150px);}
+  }
+
   header.banner #workbtn {
     position: absolute;
     bottom: 0;
