@@ -15306,16 +15306,19 @@ header.banner {
     transform: translate(0, -100px);
     left: 0;
     width: 100%;
-    z-index: 1; }
+    z-index: 1; 
+  }
   @media only screen and (min-width: 64.063em) {
     header.banner .atom-wrap {
       width: 70vw;
-      margin: 0 auto; } }
+      margin: 0 auto; } 
+  }
   header.banner h1 {
-    font-size: 72px;
-    line-height: 80px;
-            text-align: left;
-    color: #080c1e; }
+    font-size: 32px;
+    line-height: 36px;
+    text-align: left;
+    color: #080c1e; 
+  }
     @media only screen and (min-width: 64.063em) {
       header.banner h1 {
         font-size: 72px;
