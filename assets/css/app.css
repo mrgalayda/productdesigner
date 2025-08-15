@@ -15309,7 +15309,7 @@ header.banner {
     z-index: 1; }
   @media only screen and (min-width: 64.063em) {
     header.banner .atom-wrap {
-      width: 600px;
+      width: 70vw;
       margin: 0 auto; } }
   header.banner h1 {
     font-size: 72px;
@@ -15317,9 +15317,9 @@ header.banner {
     color: #080c1e; }
     @media only screen and (min-width: 64.063em) {
       header.banner h1 {
-        font-size: 200px;
+        font-size: 72px;
         text-align: center;
-        line-height: 170px; } }
+        line-height: 80px; } }
   header.banner p {
     font-size: 20px;
     padding-bottom: 25px; }
