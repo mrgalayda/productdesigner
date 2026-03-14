@@ -1,0 +1,210 @@
+/* ── GARRETT GALAYDA — CASE STUDY SYSTEM ── */
+
+/* ── COLFAX FONT FACES ── */
+@font-face {
+  font-family: 'Colfax';
+  src: url('colfaxThin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Colfax';
+  src: url('colfaxLight.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Colfax';
+  src: url('Colfax-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Colfax';
+  src: url('Colfax-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*
+  WEIGHT MAPPING  Barlow → Colfax
+  ─────────────────────────────────────────────────
+  Barlow Condensed 900   → Colfax Bold (700)
+    Used for: hero titles, stat numbers, h2, card titles, nav logo,
+              meta values, next-title, closer-quote, footer-name
+    Compensate for non-condensed width: uppercase + tight letter-spacing
+
+  Barlow Semi Condensed 700/600 → Colfax Bold (700)
+    Used for: tags, labels, nav links, buttons, callout text,
+              h3, sum-label, sum-pink, closer-btn, hero-tag
+
+  Barlow 400  → Colfax Regular (400)
+    Used for: body base, .lead
+
+  Barlow 300  → Colfax Light (300)
+    Used for: body paragraphs, stat-desc, card-text, sum-desc,
+              closer-sub, footer-note
+
+  Barlow 100  → Colfax Thin (100)
+    Used for: decorative ghost numbers (.section-num, .ghost-num, .closer::before)
+  ─────────────────────────────────────────────────
+*/
+
+:root {
+  --bg:        #EAECF2;
+  --bg-card:   #F2F4F9;
+  --bg-mid:    #151E30;
+  --navy:      #0C1322;
+  --pink:      #FF1654;
+  --pink-dark: #CC0F40;
+  --blue:      #1A6BFF;
+  --teal:      #00C9A7;
+  --body-text: #3A4258;
+  --muted:     #7A8099;
+  --rule:      #D4D8E4;
+  --white:     #FFFFFF;
+  --tracking-display: -0.03em;
+  --tracking-label:    0.14em;
+  --tracking-upper:    0.08em;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--navy);
+  font-family: 'Colfax', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+nav { background: var(--navy); padding: 0 64px; display: flex; align-items: stretch; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+.nav-logo { font-family: 'Colfax', sans-serif; font-weight: 700; font-size: 17px; color: var(--white); text-transform: uppercase; letter-spacing: var(--tracking-upper); display: flex; align-items: center; padding: 18px 0; text-decoration: none; }
+.nav-logo span { color: var(--pink); }
+.nav-links { display: flex; align-items: stretch; gap: 0; }
+.nav-link { font-family: 'Colfax', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: rgba(255,255,255,0.45); text-decoration: none; padding: 0 20px; display: flex; align-items: center; border-bottom: 3px solid transparent; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
+.nav-link:hover { color: var(--white); }
+.nav-link.active { color: var(--white); border-bottom-color: var(--pink); }
+
+/* ── HERO ── */
+.hero { padding: 80px 64px 64px; max-width: 1200px; margin: 0 auto; }
+.hero-tag { display: inline-block; background: var(--pink); color: var(--white); font-family: 'Colfax', sans-serif; font-weight: 700; font-size: 10px; letter-spacing: var(--tracking-label); text-transform: uppercase; padding: 6px 14px; margin-bottom: 32px; opacity: 0; animation: fadeUp 0.6s 0.1s forwards; }
+.hero-title { font-family: 'Colfax', sans-serif; font-weight: 700; font-size: clamp(40px, 5.5vw, 76px); line-height: 0.97; color: var(--navy); text-transform: uppercase; letter-spacing: var(--tracking-display); margin-bottom: 32px; max-width: 900px; opacity: 0; animation: fadeUp 0.6s 0.25s forwards; }
+.hero-sub { font-family: 'Colfax', sans-serif; font-size: 18px; font-weight: 300; color: var(--body-text); max-width: 620px; line-height: 1.7; margin-bottom: 48px; opacity: 0; animation: fadeUp 0.6s 0.4s forwards; }
+.hero-meta { display: flex; border-top: 2px solid var(--navy); border-bottom: 1px solid var(--rule); padding: 24px 0; opacity: 0; animation: fadeUp 0.6s 0.55s forwards; flex-wrap: wrap; gap: 20px; }
+.meta-item { padding-right: 48px; border-right: 1px solid var(--rule); }
+.meta-item:last-child { border-right: none; padding-right: 0; }
+.meta-label { font-family: 'Colfax', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--pink); margin-bottom: 4px; }
+.meta-value { font-family: 'Colfax', sans-serif; font-weight: 700; font-size: 15px; color: var(--navy); text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* ── STATS ── */
+.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; opacity: 0; animation: fadeUp 0.6s 0.7s forwards; }
+.stat-card { background: var(--navy); padding: 52px 48px; position: relative; overflow: hidden; }
+.stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+.stat-card:nth-child(1)::before { background: var(--pink); }
+.stat-card:nth-child(2)::before { background: var(--blue); }
+.stat-card:nth-child(3)::before { background: var(--teal); }
+.stat-num { font-family: 'Colfax', sans-serif; font-weight: 700; font-size: 68px; line-height: 1; color: var(--white); letter-spacing: var(--tracking-display); margin-bottom: 12px; }
+.stat-num .accent { color: var(--pink); }
+.stat-card:nth-child(2) .stat-num .accent { color: var(--blue); }
+.stat-card:nth-child(3) .stat-num .accent { color: var(--teal); }
+.stat-desc { font-family: 'Colfax', sans-serif; font-weight: 300; font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+/* ── MAIN ── */
+.main { max-width: 1200px; margin: 0 auto; padding: 0 64px; }
+
+/* ── SECTIONS ── */
+.section { padding: 80px 0; border-bottom: 1px solid var(--rule); opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.section.visible { opacity: 1; transform: translateY(0); }
+.section-grid { display: grid; grid-template-columns: 180px 1fr; gap: 64px; align-items: start; }
+
+/* Ghost section numbers — Thin for decorative lightness */
+.section-num { font-family: 'Colfax', sans-serif; font-weight: 100; font-size: 120px; line-height: 1; color: var(--rule); letter-spacing: -0.04em; text-align: right; position: sticky; top: 70px; margin-top: -12px; }
+
+.section-tag { font-family: 'Colfax', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--pink); margin-bottom: 14px; }
+
+h2 { font-family: 'Colfax', sans-serif; font-weight: 700; font-size: clamp(30px, 3.2vw, 48px); line-height: 0.97; color: var(--navy); text-transform: uppercase; letter-spacing: var(--tracking-display); margin-bottom: 28px; }
+h3 { font-family: 'Colfax', sans-serif; font-weight: 700; font-size: 11px; color: var(--navy); margin: 28px 0 8px; text-transform: uppercase; letter-spacing: var(--tracking-label); }
+p { font-family: 'Colfax', sans-serif; font-size: 16px; line-height: 1.8; color: var(--body-text); margin-bottom: 16px; font-weight: 300; }
+.lead { font-family: 'Colfax', sans-serif; font-size: 19px; font-weight: 400; color: var(--navy); line-height: 1.65; margin-bottom: 24px; }
+
+/* ── CALLOUT ── */
+.callout { border-left: 4px solid var(--pink); padding: 22px 28px; background: var(--bg-card); margin: 28px 0; }
+.callout.blue { border-color: var(--blue); }
+.callout.teal { border-color: var(--teal); }
+.callout p { font-family: 'Colfax', sans-serif; font-weight: 700; font-size: 17px; color: var(--navy); margin: 0; line-height: 1.55; }
+
+/* ── BULLET LIST ── */
+ul.styled { list-style: none; margin: 20px 0; display: flex; flex-direction: column; gap: 10px; }
+ul.styled li { display: flex; align-items: baseline; gap: 14px; font-family: 'Colfax', sans-serif; font-size: 16px; color: var(--body-text); font-weight: 300; line-height: 1.6; }
+ul.styled li::before { content: '—'; color: var(--pink); font-weight: 700; flex-shrink: 0; font-family: 'Colfax', sans-serif; }
+ul.styled li strong { font-weight: 700; color: var(--navy); }
+
+/* ── CARD GRIDS ── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin: 28px 0; }
+.three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin: 28px 0; }
+
+.dark-card { background: var(--navy); padding: 36px 28px; position: relative; }
+.light-card { background: var(--bg-card); border: 1px solid var(--rule); padding: 36px 32px; position: relative; overflow: hidden; transition: background 0.2s; }
+.light-card:hover { background: var(--white); }
+
+.card-tag { font-family: 'Colfax', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--pink); margin-bottom: 10px; position: relative; z-index: 2; }
+.card-title { font-family: 'Colfax', sans-serif; font-weight: 700; font-size: 17px; text-transform: uppercase; letter-spacing: 0.02em; color: var(--navy); margin-bottom: 10px; position: relative; z-index: 2; }
+.card-text { font-family: 'Colfax', sans-serif; font-size: 14px; color: var(--body-text); line-height: 1.7; font-weight: 300; position: relative; z-index: 2; margin: 0; }
+.dark-card .card-text { color: rgba(255,255,255,0.6); }
+.dark-card .card-tag { color: var(--pink); }
+
+/* Ghost numbers — Thin weight, purely decorative */
+.ghost-num { position: absolute; top: -16px; right: 12px; font-family: 'Colfax', sans-serif; font-weight: 100; font-size: 130px; color: var(--rule); line-height: 1; pointer-events: none; letter-spacing: -0.04em; }
+
+/* ── SUMMARY TABLE ── */
+.sum-table { border: 1px solid var(--rule); overflow: hidden; margin: 28px 0; }
+.sum-row { display: grid; grid-template-columns: 220px 1fr; border-bottom: 1px solid var(--rule); }
+.sum-row:last-child { border-bottom: none; }
+.sum-label { background: var(--navy); padding: 24px; font-family: 'Colfax', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--white); display: flex; align-items: center; line-height: 1.3; }
+.sum-row:nth-child(even) .sum-label { background: var(--bg-mid); }
+.sum-pink { color: var(--pink); display: block; font-size: 8px; letter-spacing: var(--tracking-label); margin-bottom: 4px; font-family: 'Colfax', sans-serif; font-weight: 700; text-transform: uppercase; }
+.sum-desc { padding: 24px 28px; font-family: 'Colfax', sans-serif; font-size: 15px; color: var(--body-text); line-height: 1.7; font-weight: 300; display: flex; align-items: center; background: var(--bg-card); margin: 0; }
+.sum-row:nth-child(even) .sum-desc { background: var(--white); }
+
+/* ── CLOSER ── */
+.closer { background: var(--navy); padding: 120px 64px; text-align: center; position: relative; overflow: hidden; }
+.closer::before { content: 'GG'; position: absolute; font-family: 'Colfax', sans-serif; font-weight: 100; font-size: 500px; color: rgba(255,255,255,0.025); top: 50%; left: 50%; transform: translate(-50%, -50%); letter-spacing: -0.06em; pointer-events: none; }
+.closer-quote { font-family: 'Colfax', sans-serif; font-weight: 700; font-size: clamp(26px, 3.8vw, 50px); color: var(--white); text-transform: uppercase; letter-spacing: var(--tracking-display); line-height: 1.08; max-width: 800px; margin: 0 auto 28px; position: relative; z-index: 2; }
+.closer-quote .pink { color: var(--pink); }
+.closer-sub { font-family: 'Colfax', sans-serif; font-size: 11px; color: rgba(255,255,255,0.35); position: relative; z-index: 2; font-weight: 300; letter-spacing: var(--tracking-label); text-transform: uppercase; margin-bottom: 48px; }
+.closer-btn { display: inline-block; background: var(--pink); color: var(--white); font-family: 'Colfax', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: var(--tracking-label); text-transform: uppercase; padding: 16px 40px; text-decoration: none; position: relative; z-index: 2; transition: background 0.2s; }
+.closer-btn:hover { background: var(--pink-dark); }
+
+/* ── NEXT STRIP ── */
+.next-strip { background: var(--bg-card); border-top: 1px solid var(--rule); padding: 48px 64px; display: flex; align-items: center; justify-content: space-between; text-decoration: none; transition: background 0.2s; }
+.next-strip:hover { background: var(--white); }
+.next-label { font-family: 'Colfax', sans-serif; font-weight: 700; font-size: 9px; letter-spacing: var(--tracking-label); text-transform: uppercase; color: var(--pink); margin-bottom: 8px; }
+.next-title { font-family: 'Colfax', sans-serif; font-weight: 700; font-size: 26px; text-transform: uppercase; color: var(--navy); letter-spacing: var(--tracking-display); line-height: 1; }
+.next-arrow { font-family: 'Colfax', sans-serif; font-weight: 700; font-size: 36px; color: var(--pink); line-height: 1; }
+
+/* ── FOOTER ── */
+footer { background: var(--bg); border-top: 1px solid var(--rule); padding: 24px 64px; display: flex; justify-content: space-between; align-items: center; }
+.footer-name { font-family: 'Colfax', sans-serif; font-weight: 700; font-size: 13px; color: var(--navy); text-transform: uppercase; letter-spacing: var(--tracking-upper); }
+.footer-note { font-family: 'Colfax', sans-serif; font-size: 11px; color: var(--muted); font-weight: 300; letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hero, .main, footer, .closer, .next-strip { padding-left: 24px; padding-right: 24px; }
+  .section-grid { grid-template-columns: 1fr; gap: 16px; }
+  .section-num { display: none; }
+  .stats-row, .two-col, .three-col { grid-template-columns: 1fr; }
+  .sum-row { grid-template-columns: 1fr; }
+  .meta-item { border-right: none; padding-right: 0; }
+}
