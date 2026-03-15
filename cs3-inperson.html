@@ -92,7 +92,25 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 .footer-name{font-family:'Colfax',sans-serif;font-weight:700;font-size:13px;color:var(--navy);text-transform:uppercase;letter-spacing:var(--tu);text-decoration:none}
 .footer-note{font-family:'Colfax',sans-serif;font-size:11px;color:var(--muted);font-weight:400;letter-spacing:.08em;text-transform:uppercase}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:900px){nav{padding:0 24px}.nav-links{display:none}.hero,.main,footer,.closer,.next-strip{padding-left:24px;padding-right:24px}.section-grid{grid-template-columns:1fr;gap:16px}.section-num{display:none}.stats-row,.two-col,.three-col{grid-template-columns:1fr}.sum-row{grid-template-columns:1fr}.meta-item{border-right:none;padding-right:0}}
+.nav-hamburger{display:none}@media(max-width:900px){
+  nav{padding:0 24px}
+  .nav-links{display:none}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--navy);z-index:999;padding:80px 32px 48px;gap:0;align-items:flex-start;justify-content:center}
+  .nav-links.open .nav-link{font-size:18px;letter-spacing:0.08em;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.08);width:100%;border-left:none;border-right:none;border-top:none}
+  .nav-links.open .nav-link.active{border-bottom:1px solid rgba(255,255,255,0.08);color:var(--pink)}
+  .nav-hamburger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;cursor:pointer;padding:8px;background:none;border:none;z-index:1000;position:relative}
+  .nav-hamburger span{display:block;width:24px;height:2px;background:var(--white);transition:transform 0.25s ease,opacity 0.25s ease}
+  .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-hamburger.open span:nth-child(2){opacity:0}
+  .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .hero,.main,footer,.closer,.next-strip{padding-left:24px;padding-right:24px}
+  .section-grid{grid-template-columns:1fr;gap:16px}
+  .section-num{display:none}
+  .stats-row,.two-col,.three-col{grid-template-columns:1fr}
+  .sum-row{grid-template-columns:1fr}
+  .meta-item{border-right:none;padding-right:0}
+  footer{flex-direction:column;gap:10px;text-align:center;padding:20px 24px}
+}
 </style>
 </head>
 <body>
@@ -336,7 +354,7 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 <div class="closer">
   <div class="closer-quote">The foundation is built.<br>The vision is documented.<br><span class="pink">The missing variable<br>is investment.</span></div>
   <div class="closer-sub">Garrett Galayda · Braintree / PayPal · In-Person Payments · 2020–2022</div>
-  <a href="http://productdesigner.io" class="closer-btn">View Portfolio →</a>
+  <a href="/cdn-cgi/l/email-protection#c9aea8bbbbacbdbd89b9bba6adbcaabdadacbaa0aea7acbbe7a0a6" class="closer-btn"><span class="__cf_email__" data-cfemail="a3c4c2d1d1c6d7d7e3d3d1ccc7d6c0d7c7c6d0cac4cdc6d18dcacc">[email&#160;protected]</span> →</a>
 </div>
 
 <a href="cs1-vas-platform.html" class="next-strip">
@@ -352,12 +370,20 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
   <span class="footer-note">Confidential · For Recruiting Purposes Only</span>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const sections = document.querySelectorAll('.section');
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.07 });
   sections.forEach(s => io.observe(s));
 </script>
-</body>
-</html>
+<script>
+function toggleNav(){
+  var btn = document.getElementById('navHamburger');
+  var links = document.getElementById('navLinks');
+  btn.classList.toggle('open');
+  links.classList.toggle('open');
+  document.body.style.overflow = links.classList.contains('open') ? 'hidden' : '';
+}
+// Close menu when a link is clicked
+document.querySelectorAll('.nav-link').forEach(function(link){

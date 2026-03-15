@@ -92,7 +92,25 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 .footer-name{font-family:'Colfax',sans-serif;font-weight:700;font-size:13px;color:var(--navy);text-transform:uppercase;letter-spacing:var(--tu);text-decoration:none}
 .footer-note{font-family:'Colfax',sans-serif;font-size:11px;color:var(--muted);font-weight:400;letter-spacing:.08em;text-transform:uppercase}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:900px){nav{padding:0 24px}.nav-links{display:none}.hero,.main,footer,.closer,.next-strip{padding-left:24px;padding-right:24px}.section-grid{grid-template-columns:1fr;gap:16px}.section-num{display:none}.stats-row,.two-col,.three-col{grid-template-columns:1fr}.sum-row{grid-template-columns:1fr}.meta-item{border-right:none;padding-right:0}}
+.nav-hamburger{display:none}@media(max-width:900px){
+  nav{padding:0 24px}
+  .nav-links{display:none}
+  .nav-links.open{display:flex;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--navy);z-index:999;padding:80px 32px 48px;gap:0;align-items:flex-start;justify-content:center}
+  .nav-links.open .nav-link{font-size:18px;letter-spacing:0.08em;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.08);width:100%;border-left:none;border-right:none;border-top:none}
+  .nav-links.open .nav-link.active{border-bottom:1px solid rgba(255,255,255,0.08);color:var(--pink)}
+  .nav-hamburger{display:flex;flex-direction:column;justify-content:center;gap:5px;width:40px;height:40px;cursor:pointer;padding:8px;background:none;border:none;z-index:1000;position:relative}
+  .nav-hamburger span{display:block;width:24px;height:2px;background:var(--white);transition:transform 0.25s ease,opacity 0.25s ease}
+  .nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-hamburger.open span:nth-child(2){opacity:0}
+  .nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .hero,.main,footer,.closer,.next-strip{padding-left:24px;padding-right:24px}
+  .section-grid{grid-template-columns:1fr;gap:16px}
+  .section-num{display:none}
+  .stats-row,.two-col,.three-col{grid-template-columns:1fr}
+  .sum-row{grid-template-columns:1fr}
+  .meta-item{border-right:none;padding-right:0}
+  footer{flex-direction:column;gap:10px;text-align:center;padding:20px 24px}
+}
 </style>
 </head>
 <body>
@@ -161,11 +179,11 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
         <h2>What We<br>Found</h2>
         <p class="lead">I took my team and scoped a project to map the entire end-to-end process for enabling a value-added service. What we discovered was alarming.</p>
         <ul class="styled">
-          <li>There was <strong>no self-service experience.</strong> Enabling a VAS required manual intervention at every step.</li>
-          <li>Merchants had <strong>no visibility</strong> into what services existed, let alone why they'd want them.</li>
-          <li>There was <strong>no pricing transparency.</strong> Merchants couldn't evaluate ROI before committing.</li>
-          <li>Merchants had <strong>no tools to build a business case</strong> and present a VAS to their own leadership.</li>
-          <li>Adoption was driven entirely by <strong>random chance encounters</strong> with the right sales rep at the right time.</li>
+          <li>There was no self-service experience. Enabling a VAS required manual intervention at every step.</li>
+          <li>Merchants had no visibility into what services existed, let alone why they'd want them.</li>
+          <li>There was no pricing transparency. Merchants couldn't evaluate ROI before committing.</li>
+          <li>Merchants had no tools to build a business case and present a VAS to their own leadership.</li>
+          <li>Adoption was driven entirely by random chance encounters with the right sales rep at the right time.</li>
         </ul>
         <div class="callout teal">
           <p>This wasn't a sales problem or a product gap. It was a design problem, and design was exactly positioned to fix it.</p>
@@ -252,23 +270,23 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 
         <h3>Assumption Busted: "Merchants don't log in"</h3>
         <ul class="styled">
-          <li>More than <strong>50% of merchants logged in every month</strong>, far more than anyone assumed.</li>
-          <li>After launching the new VAS framework, <strong>repeat login rates increased</strong>, giving merchants a reason to come back.</li>
-          <li>The control panel became <strong>a product in its own right</strong>, not just a configuration utility.</li>
+          <li>More than 50% of merchants logged in every month, far more than anyone assumed.</li>
+          <li>After launching the new VAS framework, repeat login rates increased, giving merchants a reason to come back.</li>
+          <li>The control panel became a product in its own right, not just a configuration utility.</li>
         </ul>
 
         <h3>Business Outcomes</h3>
         <ul class="styled">
-          <li>Drove adoption of <strong>multiple margin-boosting products</strong> across the merchant base.</li>
-          <li>Merchants reported <strong>positive ROI</strong> from enabled services, validated through our performance dashboards.</li>
-          <li>Proved that <strong>self-service adoption is possible at enterprise scale</strong> in a segment previously considered too complex for it.</li>
+          <li>Drove adoption of multiple margin-boosting products across the merchant base.</li>
+          <li>Merchants reported positive ROI from enabled services, validated through our performance dashboards.</li>
+          <li>Proved that self-service adoption is possible at enterprise scale in a segment previously considered too complex for it.</li>
         </ul>
 
         <h3>Org Impact</h3>
         <ul class="styled">
-          <li>Design went from an afterthought to a <strong>sought-after partner</strong> within the LE org.</li>
-          <li>Multiple PMs who had never engaged with design began <strong>proactively requesting collaboration.</strong></li>
-          <li>Reusable frameworks were <strong>adopted by other product teams</strong> for their own launches.</li>
+          <li>Design went from an afterthought to a sought-after partner within the LE org.</li>
+          <li>Multiple PMs who had never engaged with design began proactively requesting collaboration.</li>
+          <li>Reusable frameworks were adopted by other product teams for their own launches.</li>
         </ul>
       </div>
     </div>
@@ -311,7 +329,7 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 <div class="closer">
   <div class="closer-quote">Design didn't wait for a seat<br>at the table.<br><span class="pink">We built one.</span></div>
   <div class="closer-sub">Garrett Galayda · Braintree / PayPal · VAS Platform · 2024–Present</div>
-  <a href="http://productdesigner.io" class="closer-btn">View Portfolio →</a>
+  <a href="/cdn-cgi/l/email-protection#65020417170011112515170a011006110100160c020b00174b0c0a" class="closer-btn"><span class="__cf_email__" data-cfemail="6a0d0b18180f1e1e2a1a18050e1f091e0e0f19030d040f18440305">[email&#160;protected]</span> →</a>
 </div>
 
 <a href="cs2-orchestration.html" class="next-strip">
@@ -327,12 +345,20 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
   <span class="footer-note">Confidential · For Recruiting Purposes Only</span>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const sections = document.querySelectorAll('.section');
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.07 });
   sections.forEach(s => io.observe(s));
 </script>
-</body>
-</html>
+<script>
+function toggleNav(){
+  var btn = document.getElementById('navHamburger');
+  var links = document.getElementById('navLinks');
+  btn.classList.toggle('open');
+  links.classList.toggle('open');
+  document.body.style.overflow = links.classList.contains('open') ? 'hidden' : '';
+}
+// Close menu when a link is clicked
+document.querySelectorAll('.nav-link').forEach(function(link){

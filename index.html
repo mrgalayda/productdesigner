@@ -241,5 +241,22 @@ document.getElementById('pwInput').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') checkPassword();
 });
 </script>
+<script>
+function toggleNav(){
+  var btn = document.getElementById('navHamburger');
+  var links = document.getElementById('navLinks');
+  btn.classList.toggle('open');
+  links.classList.toggle('open');
+  document.body.style.overflow = links.classList.contains('open') ? 'hidden' : '';
+}
+// Close menu when a link is clicked
+document.querySelectorAll('.nav-link').forEach(function(link){
+  link.addEventListener('click', function(){
+    document.getElementById('navHamburger').classList.remove('open');
+    document.getElementById('navLinks').classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+</script>
 </body>
 </html>
