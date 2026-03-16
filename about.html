@@ -168,7 +168,7 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 .one-pct{background:var(--pink);padding:64px;margin:32px 0 0;position:relative;overflow:hidden}
 .one-pct::before{content:'1%';position:absolute;font-family:'Colfax',sans-serif;font-weight:700;font-size:280px;color:rgba(255,255,255,.08);top:50%;right:-20px;transform:translateY(-50%);line-height:1;letter-spacing:-.06em;pointer-events:none}
 .one-pct-text{font-family:'Colfax',sans-serif;font-weight:700;font-size:clamp(22px,3vw,36px);color:var(--white);text-transform:uppercase;letter-spacing:-.02em;line-height:1.1;max-width:600px;position:relative;z-index:2;margin:0}
-.nav-hamburger{display:none;align-self:center}@media(max-width:900px){.about-hero{grid-template-columns:1fr;min-height:auto}.about-hero-left{padding:60px 24px 48px}.about-hero-right{padding:40px 24px;min-height:280px}.about-main{padding:0 24px}.about-section-grid{grid-template-columns:1fr;gap:16px}.about-section-num{display:none}.pillars,.hobbies{grid-template-columns:1fr}.venture{grid-template-columns:1fr}.venture-year{padding:20px 24px}.one-pct{padding:40px 24px}}
+@media(max-width:900px){.about-hero{grid-template-columns:1fr;min-height:auto}.about-hero-left{padding:60px 24px 48px}.about-hero-right{padding:40px 24px;min-height:280px}.about-main{padding:0 24px}.about-section-grid{grid-template-columns:1fr;gap:16px}.about-section-num{display:none}.pillars,.hobbies{grid-template-columns:1fr}.venture{grid-template-columns:1fr}.venture-year{padding:20px 24px}.one-pct{padding:40px 24px}}
 
 .logo-wall{
   background:var(--navy);
@@ -462,6 +462,22 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function toggleNav(){
+  var btn = document.getElementById('navHamburger');
+  var links = document.getElementById('navLinks');
+  btn.classList.toggle('open');
+  links.classList.toggle('open');
+  document.body.style.overflow = links.classList.contains('open') ? 'hidden' : '';
+}
+document.querySelectorAll('.nav-link').forEach(function(link){
+  link.addEventListener('click', function(){
+    document.getElementById('navHamburger').classList.remove('open');
+    document.getElementById('navLinks').classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+</script>
+<script>
   const sections = document.querySelectorAll('.about-section');
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
