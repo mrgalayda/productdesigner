@@ -15,7 +15,7 @@ nav{background:var(--navy);padding:0 64px;display:flex;align-items:stretch;justi
 .nav-logo{font-family:'Colfax',sans-serif;font-weight:700;font-size:17px;color:var(--white);text-transform:uppercase;letter-spacing:var(--tu);display:flex;align-items:center;padding:18px 0;text-decoration:none}
 .nav-logo span{color:var(--pink)}
 .nav-links{display:flex;align-items:stretch}
-.nav-link{font-family:'Colfax',sans-serif;font-weight:700;font-size:10px;letter-spacing:var(--tl);text-transform:uppercase;color:rgba(255,255,255,.72);text-decoration:none;padding:0 20px;display:flex;align-items:center;border-bottom:3px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap}
+.nav-link{font-family:'Colfax',sans-serif;font-weight:700;font-size:10px;letter-spacing:var(--tl);text-transform:uppercase;color:var(--white);text-decoration:none;padding:0 20px;display:flex;align-items:center;border-bottom:3px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap}
 .nav-link:hover{color:var(--white)}
 .nav-link.active{color:var(--white);border-bottom-color:var(--pink)}
 .hero{padding:80px 64px 64px;max-width:1200px;margin:0 auto}
@@ -37,9 +37,9 @@ nav{background:var(--navy);padding:0 64px;display:flex;align-items:stretch;justi
 .stat-num .accent{color:var(--pink)}
 .stat-card:nth-child(2) .stat-num .accent{color:var(--blue)}
 .stat-card:nth-child(3) .stat-num .accent{color:var(--teal)}
-.stat-desc{font-family:'Colfax',sans-serif;font-weight:400;font-size:14px;color:rgba(255,255,255,.72);line-height:1.6}
+.stat-desc{font-family:'Colfax',sans-serif;font-weight:400;font-size:14px;color:var(--white);line-height:1.6}
 .main{max-width:1200px;margin:0 auto;padding:0 64px}
-.section{padding:80px 0;border-bottom:1px solid var(--rule);opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+.section{padding:80px 0;border-bottom:1px solid var(--rule);opacity:1;transform:translateY(0);transition:opacity .65s ease,transform .65s ease}
 .section.visible{opacity:1;transform:translateY(0)}
 .section-grid{display:grid;grid-template-columns:180px 1fr;gap:64px;align-items:start}
 .section-num{font-family:'Colfax',sans-serif;font-weight:100;font-size:120px;line-height:1;color:var(--rule);letter-spacing:-.04em;text-align:right;position:sticky;top:70px;margin-top:-12px}
@@ -64,7 +64,7 @@ ul.styled li strong{font-weight:700;color:var(--navy)}
 .card-tag{font-family:'Colfax',sans-serif;font-weight:700;font-size:9px;letter-spacing:var(--tl);text-transform:uppercase;color:var(--pink);margin-bottom:10px;position:relative;z-index:2}
 .card-title{font-family:'Colfax',sans-serif;font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:.02em;color:var(--navy);margin-bottom:10px;position:relative;z-index:2}
 .card-text{font-family:'Colfax',sans-serif;font-size:14px;color:var(--body-text);line-height:1.7;font-weight:400;position:relative;z-index:2;margin:0}
-.dark-card .card-text{color:rgba(255,255,255,.6)}
+.dark-card .card-text{color:var(--white)}
 .dark-card .card-tag{color:var(--pink)}
 .ghost-num{position:absolute;top:-16px;right:12px;font-family:'Colfax',sans-serif;font-weight:100;font-size:130px;color:var(--rule);line-height:1;pointer-events:none;letter-spacing:-.04em}
 .sum-table{border:1px solid var(--rule);overflow:hidden;margin:28px 0}
@@ -79,7 +79,7 @@ ul.styled li strong{font-weight:700;color:var(--navy)}
 .closer::before{content:'GG';position:absolute;font-family:'Colfax',sans-serif;font-weight:100;font-size:500px;color:rgba(255,255,255,.025);top:50%;left:50%;transform:translate(-50%,-50%);letter-spacing:-.06em;pointer-events:none}
 .closer-quote{font-family:'Colfax',sans-serif;font-weight:700;font-size:clamp(26px,3.8vw,50px);color:var(--white);text-transform:uppercase;letter-spacing:var(--td);line-height:1.08;max-width:800px;margin:0 auto 28px;position:relative;z-index:2}
 .closer-quote .pink{color:var(--pink)}
-.closer-sub{font-family:'Colfax',sans-serif;font-size:11px;color:rgba(255,255,255,.72);position:relative;z-index:2;font-weight:400;letter-spacing:var(--tl);text-transform:uppercase;margin-bottom:48px}
+.closer-sub{font-family:'Colfax',sans-serif;font-size:11px;color:var(--white);position:relative;z-index:2;font-weight:400;letter-spacing:var(--tl);text-transform:uppercase;margin-bottom:48px}
 .closer-btn{display:inline-block;background:var(--pink);color:var(--white);font-family:'Colfax',sans-serif;font-weight:700;font-size:11px;letter-spacing:var(--tl);text-transform:uppercase;padding:16px 40px;text-decoration:none;position:relative;z-index:2;transition:background .2s}
 .closer-btn:hover{background:var(--pink-dark)}
 .next-strip{background:var(--bg-card);border-top:1px solid var(--rule);padding:48px 64px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;transition:background .2s}
@@ -91,7 +91,7 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 .footer-name{font-family:'Colfax',sans-serif;font-weight:700;font-size:13px;color:var(--navy);text-transform:uppercase;letter-spacing:var(--tu);text-decoration:none}
 .footer-note{font-family:'Colfax',sans-serif;font-size:11px;color:var(--muted);font-weight:400;letter-spacing:.08em;text-transform:uppercase}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.nav-hamburger{display:none}@media(max-width:900px){
+.nav-hamburger{display:none;align-self:center}@media(max-width:900px){
   nav{padding:0 24px}
   .nav-links{display:none}
   .nav-links.open{display:flex;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--navy);z-index:999;padding:80px 32px 48px;gap:0;align-items:flex-start;justify-content:center}
@@ -118,9 +118,9 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 .about-eyebrow{font-family:'Colfax',sans-serif;font-weight:700;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--pink);margin-bottom:28px;opacity:0;animation:fadeUp .6s .1s forwards}
 .about-name{font-family:'Colfax',sans-serif;font-weight:700;font-size:clamp(52px,7vw,88px);line-height:.93;color:var(--white);text-transform:uppercase;letter-spacing:-.03em;margin-bottom:32px;opacity:0;animation:fadeUp .6s .25s forwards}
 .about-name .pink{color:var(--pink)}
-.about-role{font-family:'Colfax',sans-serif;font-weight:400;font-size:18px;color:rgba(255,255,255,.82);line-height:1.6;max-width:420px;opacity:0;animation:fadeUp .6s .4s forwards;margin-bottom:52px}
+.about-role{font-family:'Colfax',sans-serif;font-weight:400;font-size:18px;color:var(--white);line-height:1.6;max-width:420px;opacity:0;animation:fadeUp .6s .4s forwards;margin-bottom:52px}
 .about-tags{display:flex;flex-wrap:wrap;gap:6px;opacity:0;animation:fadeUp .6s .55s forwards}
-.about-tag{font-family:'Colfax',sans-serif;font-weight:700;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:7px 14px;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.78)}
+.about-tag{font-family:'Colfax',sans-serif;font-weight:700;font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:7px 14px;border:1px solid rgba(255,255,255,.3);color:var(--white)}
 .about-tag.active{background:var(--pink);border-color:var(--pink);color:var(--white)}
 .hero-aside{position:relative;z-index:3;width:100%}
 .hero-aside-stat{background:rgba(255,255,255,0.92);border:1px solid var(--rule);padding:32px 36px;margin-bottom:3px;backdrop-filter:blur(4px)}
@@ -129,7 +129,7 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 .has-num .pink{color:var(--pink)}
 .has-label{font-family:'Colfax',sans-serif;font-weight:400;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
 .about-main{max-width:1200px;margin:0 auto;padding:0 64px}
-.about-section{padding:88px 0;border-bottom:1px solid var(--rule);opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+.about-section{padding:88px 0;border-bottom:1px solid var(--rule);opacity:1;transform:translateY(0);transition:opacity .65s ease,transform .65s ease}
 .about-section.visible{opacity:1;transform:translateY(0)}
 .about-section-grid{display:grid;grid-template-columns:200px 1fr;gap:64px;align-items:start}
 .about-section-num{font-family:'Colfax',sans-serif;font-weight:100;font-size:120px;line-height:1;color:var(--rule);letter-spacing:-.04em;text-align:right;position:sticky;top:70px;margin-top:-12px}
@@ -163,19 +163,93 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 .hobby-card-body{padding:32px 36px;flex:1;position:relative;z-index:2}
 .hobby-big-icon{display:block;margin-bottom:16px;width:48px;height:48px}
 .hobby-title{font-family:'Colfax',sans-serif;font-weight:700;font-size:18px;text-transform:uppercase;letter-spacing:-.01em;color:var(--white);margin-bottom:12px}
-.hobby-text{font-family:'Colfax',sans-serif;font-size:15px;color:rgba(255,255,255,.78);line-height:1.7;font-weight:400;margin:0}
+.hobby-text{font-family:'Colfax',sans-serif;font-size:15px;color:var(--white);line-height:1.7;font-weight:400;margin:0}
 .hobby-card::before{content:none}
 .one-pct{background:var(--pink);padding:64px;margin:32px 0 0;position:relative;overflow:hidden}
 .one-pct::before{content:'1%';position:absolute;font-family:'Colfax',sans-serif;font-weight:700;font-size:280px;color:rgba(255,255,255,.08);top:50%;right:-20px;transform:translateY(-50%);line-height:1;letter-spacing:-.06em;pointer-events:none}
 .one-pct-text{font-family:'Colfax',sans-serif;font-weight:700;font-size:clamp(22px,3vw,36px);color:var(--white);text-transform:uppercase;letter-spacing:-.02em;line-height:1.1;max-width:600px;position:relative;z-index:2;margin:0}
-.nav-hamburger{display:none}@media(max-width:900px){.about-hero{grid-template-columns:1fr;min-height:auto}.about-hero-left{padding:60px 24px 48px}.about-hero-right{padding:40px 24px;min-height:280px}.about-main{padding:0 24px}.about-section-grid{grid-template-columns:1fr;gap:16px}.about-section-num{display:none}.pillars,.hobbies{grid-template-columns:1fr}.venture{grid-template-columns:1fr}.venture-year{padding:20px 24px}.one-pct{padding:40px 24px}}
+.nav-hamburger{display:none;align-self:center}@media(max-width:900px){.about-hero{grid-template-columns:1fr;min-height:auto}.about-hero-left{padding:60px 24px 48px}.about-hero-right{padding:40px 24px;min-height:280px}.about-main{padding:0 24px}.about-section-grid{grid-template-columns:1fr;gap:16px}.about-section-num{display:none}.pillars,.hobbies{grid-template-columns:1fr}.venture{grid-template-columns:1fr}.venture-year{padding:20px 24px}.one-pct{padding:40px 24px}}
+
+.logo-wall{
+  background:var(--navy);
+  padding:56px 64px;
+}
+.logo-wall-inner{
+  max-width:1200px;
+  margin:0 auto;
+}
+.logo-wall-label{
+  font-family:'Colfax',sans-serif;
+  font-weight:700;
+  font-size:9px;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:rgba(255,255,255,0.35);
+  margin-bottom:36px;
+  text-align:center;
+}
+.logo-grid{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:center;
+  gap:0;
+}
+.logo-item{
+  font-family:'Colfax',sans-serif;
+  font-weight:700;
+  font-size:clamp(14px,1.8vw,20px);
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  color:rgba(255,255,255,0.25);
+  padding:16px 32px;
+  border-right:1px solid rgba(255,255,255,0.08);
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  white-space:nowrap;
+  transition:color 0.2s;
+}
+.logo-item:hover{color:rgba(255,255,255,0.75)}
+@media(max-width:900px){
+  .logo-wall{padding:40px 24px}
+  .logo-item{font-size:13px;padding:14px 20px}
+}
+
+.companies-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  margin-top:8px;
+}
+.company-item{
+  font-family:'Colfax',sans-serif;
+  font-weight:400;
+  font-size:16px;
+  color:var(--body-text);
+  padding:10px 0;
+  border-bottom:1px solid var(--rule);
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.company-item::before{
+  content:'';
+  width:6px;
+  height:6px;
+  background:var(--pink);
+  flex-shrink:0;
+  display:block;
+}
+@media(max-width:600px){
+  .companies-grid{grid-template-columns:1fr}
+}
 </style>
 </head>
 <body>
 
 <nav>
   <a href="index.html" class="nav-logo">Garrett Galayda</a>
-  <div class="nav-links">
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nav-links" id="navLinks">
     <a href="casestudies.html" class="nav-link">Case Studies</a>
     <a href="cs1-vas-platform.html" class="nav-link">01 — VAS Platform</a>
     <a href="cs2-orchestration.html" class="nav-link">02 — Orchestration Vision</a>
@@ -203,6 +277,9 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 
   </div>
 </div>
+
+
+
 
 <div class="about-main">
 
@@ -301,10 +378,41 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
     </div>
   </div>
 
-  <!-- HOBBIES -->
+  
+  <!-- COMPANIES -->
   <div class="about-section">
     <div class="about-section-grid">
       <div class="about-section-num">03</div>
+      <div>
+        <div class="section-tag">Experience</div>
+        <h2>Companies I've<br>Worked With</h2>
+        <p>I've been fortunate to work with some great companies across a range of industries.</p>
+        <div class="companies-grid">
+          <div class="company-item">Braintree</div>
+          <div class="company-item">PayPal</div>
+          <div class="company-item">Reverb</div>
+          <div class="company-item">The Parking Spot</div>
+          <div class="company-item">Patagonia</div>
+          <div class="company-item">Kohler</div>
+          <div class="company-item">CB2</div>
+          <div class="company-item">Sub-Zero</div>
+          <div class="company-item">New World Ventures</div>
+          <div class="company-item">Lightbank</div>
+          <div class="company-item">Chicago Yacht Club</div>
+          <div class="company-item">Doejo</div>
+          <div class="company-item">Buzzdraft</div>
+          <div class="company-item">Museum of Science and Industry</div>
+          <div class="company-item">We Can't Stop Thinking</div>
+          <div class="company-item">WNDR Museum</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- HOBBIES -->
+  <div class="about-section">
+    <div class="about-section-grid">
+      <div class="about-section-num">04</div>
       <div>
         <div class="section-tag">Outside the Work</div>
         <h2>Beginner's Mind.<br>Always.</h2>
@@ -337,7 +445,7 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 <div class="closer">
   <div class="closer-quote">Strategic designer.<br>Principal-level thinker.<br><span class="pink">Based in Chicago.</span></div>
   <div class="closer-sub">Garrett Galayda · productdesigner.io</div>
-  <a href="/cdn-cgi/l/email-protection#52353320203726261222203d362731263637213b353c37207c3b3d" class="closer-btn"><span class="__cf_email__" data-cfemail="167177646473626256666479726375627273657f71787364387f79">[email&#160;protected]</span> →</a>
+  <a href="/cdn-cgi/l/email-protection#5d3a3c2f2f3829291d2d2f3239283e2939382e343a33382f733432" class="closer-btn"><span class="__cf_email__" data-cfemail="462127343423323206363429223325322223352f21282334682f29">[email&#160;protected]</span> →</a>
 </div>
 
 <a href="casestudies.html" class="next-strip">

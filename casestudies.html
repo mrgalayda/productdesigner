@@ -16,7 +16,7 @@ nav{background:var(--navy);padding:0 64px;display:flex;align-items:stretch;justi
 .nav-logo{font-family:'Colfax',sans-serif;font-weight:700;font-size:17px;color:var(--white);text-transform:uppercase;letter-spacing:var(--tu);display:flex;align-items:center;padding:18px 0;text-decoration:none}
 .nav-logo span{color:var(--pink)}
 .nav-links{display:flex;align-items:stretch}
-.nav-link{font-family:'Colfax',sans-serif;font-weight:700;font-size:10px;letter-spacing:var(--tl);text-transform:uppercase;color:rgba(255,255,255,.72);text-decoration:none;padding:0 20px;display:flex;align-items:center;border-bottom:3px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap}
+.nav-link{font-family:'Colfax',sans-serif;font-weight:700;font-size:10px;letter-spacing:var(--tl);text-transform:uppercase;color:var(--white);text-decoration:none;padding:0 20px;display:flex;align-items:center;border-bottom:3px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap}
 .nav-link:hover{color:var(--white)}
 .nav-link.active{color:var(--white);border-bottom-color:var(--pink)}
 .hero{padding:80px 64px 64px;max-width:1200px;margin:0 auto}
@@ -38,9 +38,9 @@ nav{background:var(--navy);padding:0 64px;display:flex;align-items:stretch;justi
 .stat-num .accent{color:var(--pink)}
 .stat-card:nth-child(2) .stat-num .accent{color:var(--blue)}
 .stat-card:nth-child(3) .stat-num .accent{color:var(--teal)}
-.stat-desc{font-family:'Colfax',sans-serif;font-weight:400;font-size:14px;color:rgba(255,255,255,.72);line-height:1.6}
+.stat-desc{font-family:'Colfax',sans-serif;font-weight:400;font-size:14px;color:var(--white);line-height:1.6}
 .main{max-width:1200px;margin:0 auto;padding:0 64px}
-.section{padding:80px 0;border-bottom:1px solid var(--rule);opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+.section{padding:80px 0;border-bottom:1px solid var(--rule);opacity:1;transform:translateY(0);transition:opacity .65s ease,transform .65s ease}
 .section.visible{opacity:1;transform:translateY(0)}
 .section-grid{display:grid;grid-template-columns:180px 1fr;gap:64px;align-items:start}
 .section-num{font-family:'Colfax',sans-serif;font-weight:100;font-size:120px;line-height:1;color:var(--rule);letter-spacing:-.04em;text-align:right;position:sticky;top:70px;margin-top:-12px}
@@ -65,7 +65,7 @@ ul.styled li strong{font-weight:700;color:var(--navy)}
 .card-tag{font-family:'Colfax',sans-serif;font-weight:700;font-size:9px;letter-spacing:var(--tl);text-transform:uppercase;color:var(--pink);margin-bottom:10px;position:relative;z-index:2}
 .card-title{font-family:'Colfax',sans-serif;font-weight:700;font-size:17px;text-transform:uppercase;letter-spacing:.02em;color:var(--navy);margin-bottom:10px;position:relative;z-index:2}
 .card-text{font-family:'Colfax',sans-serif;font-size:14px;color:var(--body-text);line-height:1.7;font-weight:400;position:relative;z-index:2;margin:0}
-.dark-card .card-text{color:rgba(255,255,255,.6)}
+.dark-card .card-text{color:var(--white)}
 .dark-card .card-tag{color:var(--pink)}
 .ghost-num{position:absolute;top:-16px;right:12px;font-family:'Colfax',sans-serif;font-weight:100;font-size:130px;color:var(--rule);line-height:1;pointer-events:none;letter-spacing:-.04em}
 .sum-table{border:1px solid var(--rule);overflow:hidden;margin:28px 0}
@@ -80,7 +80,7 @@ ul.styled li strong{font-weight:700;color:var(--navy)}
 .closer::before{content:'GG';position:absolute;font-family:'Colfax',sans-serif;font-weight:100;font-size:500px;color:rgba(255,255,255,.025);top:50%;left:50%;transform:translate(-50%,-50%);letter-spacing:-.06em;pointer-events:none}
 .closer-quote{font-family:'Colfax',sans-serif;font-weight:700;font-size:clamp(26px,3.8vw,50px);color:var(--white);text-transform:uppercase;letter-spacing:var(--td);line-height:1.08;max-width:800px;margin:0 auto 28px;position:relative;z-index:2}
 .closer-quote .pink{color:var(--pink)}
-.closer-sub{font-family:'Colfax',sans-serif;font-size:11px;color:rgba(255,255,255,.72);position:relative;z-index:2;font-weight:400;letter-spacing:var(--tl);text-transform:uppercase;margin-bottom:48px}
+.closer-sub{font-family:'Colfax',sans-serif;font-size:11px;color:var(--white);position:relative;z-index:2;font-weight:400;letter-spacing:var(--tl);text-transform:uppercase;margin-bottom:48px}
 .closer-btn{display:inline-block;background:var(--pink);color:var(--white);font-family:'Colfax',sans-serif;font-weight:700;font-size:11px;letter-spacing:var(--tl);text-transform:uppercase;padding:16px 40px;text-decoration:none;position:relative;z-index:2;transition:background .2s}
 .closer-btn:hover{background:var(--pink-dark)}
 .next-strip{background:var(--bg-card);border-top:1px solid var(--rule);padding:48px 64px;display:flex;align-items:center;justify-content:space-between;text-decoration:none;transition:background .2s}
@@ -92,7 +92,7 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 .footer-name{font-family:'Colfax',sans-serif;font-weight:700;font-size:13px;color:var(--navy);text-transform:uppercase;letter-spacing:var(--tu);text-decoration:none}
 .footer-note{font-family:'Colfax',sans-serif;font-size:11px;color:var(--muted);font-weight:400;letter-spacing:.08em;text-transform:uppercase}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.nav-hamburger{display:none}@media(max-width:900px){
+.nav-hamburger{display:none;align-self:center}@media(max-width:900px){
   nav{padding:0 24px}
   .nav-links{display:none}
   .nav-links.open{display:flex;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--navy);z-index:999;padding:80px 32px 48px;gap:0;align-items:flex-start;justify-content:center}
@@ -206,7 +206,8 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 
 <nav>
   <a href="index.html" class="nav-logo">Garrett Galayda</a>
-  <div class="nav-links">
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nav-links" id="navLinks">
     <a href="casestudies.html" class="nav-link active">Case Studies</a>
     <a href="cs1-vas-platform.html" class="nav-link">01 — VAS Platform</a>
     <a href="cs2-orchestration.html" class="nav-link">02 — Orchestration Vision</a>
@@ -292,7 +293,7 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 <div class="bottom-cta">
   <div class="bottom-cta-title">Let's Talk.</div>
   <p class="bottom-cta-sub">Strategic designer. Principal-level thinker. Based in Chicago.</p>
-  <a href="/cdn-cgi/l/email-protection#a4c3c5d6d6c1d0d0e4d4d6cbc0d1c7d0c0c1d7cdc3cac1d68acdcb" class="bottom-cta-btn"><span class="__cf_email__" data-cfemail="5a3d3b28283f2e2e1a2a28353e2f392e3e3f29333d343f28743335">[email&#160;protected]</span> →</a>
+  <a href="/cdn-cgi/l/email-protection#9ff8feededfaebebdfefedf0fbeafcebfbfaecf6f8f1faedb1f6f0" class="bottom-cta-btn"><span class="__cf_email__" data-cfemail="93f4f2e1e1f6e7e7d3e3e1fcf7e6f0e7f7f6e0faf4fdf6e1bdfafc">[email&#160;protected]</span> →</a>
 </div>
 
 <footer>

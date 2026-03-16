@@ -40,7 +40,7 @@ nav{background:var(--navy);padding:0 64px;display:flex;align-items:stretch;justi
 .stat-card:nth-child(3) .stat-num .accent{color:var(--teal)}
 .stat-desc{font-family:'Colfax',sans-serif;font-weight:400;font-size:14px;color:var(--white);line-height:1.6}
 .main{max-width:1200px;margin:0 auto;padding:0 64px}
-.section{padding:80px 0;border-bottom:1px solid var(--rule);opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+.section{padding:80px 0;border-bottom:1px solid var(--rule);opacity:1;transform:translateY(0);transition:opacity .65s ease,transform .65s ease}
 .section.visible{opacity:1;transform:translateY(0)}
 .section-grid{display:grid;grid-template-columns:180px 1fr;gap:64px;align-items:start}
 .section-num{font-family:'Colfax',sans-serif;font-weight:100;font-size:120px;line-height:1;color:var(--rule);letter-spacing:-.04em;text-align:right;position:sticky;top:70px;margin-top:-12px}
@@ -92,7 +92,7 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 .footer-name{font-family:'Colfax',sans-serif;font-weight:700;font-size:13px;color:var(--navy);text-transform:uppercase;letter-spacing:var(--tu);text-decoration:none}
 .footer-note{font-family:'Colfax',sans-serif;font-size:11px;color:var(--muted);font-weight:400;letter-spacing:.08em;text-transform:uppercase}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.nav-hamburger{display:none}@media(max-width:900px){
+.nav-hamburger{display:none;align-self:center}@media(max-width:900px){
   nav{padding:0 24px}
   .nav-links{display:none}
   .nav-links.open{display:flex;flex-direction:column;position:fixed;top:0;left:0;right:0;bottom:0;background:var(--navy);z-index:999;padding:80px 32px 48px;gap:0;align-items:flex-start;justify-content:center}
@@ -133,8 +133,9 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 
 <nav>
   <a href="index.html" class="nav-logo">Garrett Galayda</a>
-  <div class="nav-links">
-    <a href="index.html" class="nav-link">Case Studies</a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Toggle menu" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  <div class="nav-links" id="navLinks">
+    <a href="casestudies.html" class="nav-link">Case Studies</a>
     <a href="cs1-vas-platform.html" class="nav-link active">01 — VAS Platform</a>
     <a href="cs2-orchestration.html" class="nav-link">02 — Orchestration Vision</a>
     <a href="cs3-inperson.html" class="nav-link">03 — In-Person Payments</a>
@@ -345,7 +346,7 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 <div class="closer">
   <div class="closer-quote">Design didn't wait for a seat<br>at the table.<br><span class="pink">We built one.</span></div>
   <div class="closer-sub">Garrett Galayda · Braintree / PayPal · VAS Platform · 2024–Present</div>
-  <button onclick="var u='garrett';var d='productdesigner.io';window.location='mail'+'to:'+u+'@'+d;" class="closer-btn" style="cursor:pointer;border:none;">garrett@productdesigner.io →</button>
+  <button onclick="var u='garrett';var d='productdesigner.io';window.location='mail'+'to:'+u+'@'+d;" class="closer-btn" style="cursor:pointer;border:none;"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="15727467677061615565677a716076617170667c727b70673b7c7a">[email&#160;protected]</a> →</button>
 </div>
 
 <a href="cs2-orchestration.html" class="next-strip">
@@ -361,14 +362,23 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
   <span class="footer-note">Confidential · For Recruiting Purposes Only</span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  const sections = document.querySelectorAll('.section');
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.07 });
-  sections.forEach(s => io.observe(s));
-</script>
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function toggleNav(){
   var btn = document.getElementById('navHamburger');
-  var links = document.getElementById('navLi
+  var links = document.getElementById('navLinks');
+  btn.classList.toggle('open');
+  links.classList.toggle('open');
+  document.body.style.overflow = links.classList.contains('open') ? 'hidden' : '';
+}
+document.querySelectorAll('.nav-link').forEach(function(link){
+  link.addEventListener('click', function(){
+    document.getElementById('navHamburger').classList.remove('open');
+    document.getElementById('navLinks').classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+</script>
+<script>
+  const sections = document.querySelectorAll('.section');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.targe
