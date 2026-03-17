@@ -133,6 +133,22 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
   transition:opacity 0.2s;
 }
 .closer-cta-link:hover{opacity:0.75}
+
+.slideshow-section{background:var(--bg);padding:0;border-bottom:1px solid var(--rule);position:relative;overflow:hidden}
+.slideshow-inner{max-width:1200px;margin:0 auto}
+.slideshow-track-wrap{overflow:hidden;position:relative}
+.slideshow-track{display:flex;transition:transform 0.4s ease}
+.slide{flex-shrink:0;width:100%;padding:48px 64px;box-sizing:border-box}
+.slide img{width:100%;height:auto;display:block;border:1px solid var(--rule);box-shadow:0 4px 24px rgba(12,19,34,0.08)}
+.slide-caption{font-family:'Colfax',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:16px;text-align:center}
+.slideshow-controls{display:flex;align-items:center;justify-content:center;gap:24px;padding:0 64px 40px}
+.slide-btn{background:none;border:1px solid var(--rule);color:var(--navy);width:40px;height:40px;cursor:pointer;font-family:'Colfax',sans-serif;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background 0.2s,color 0.2s}
+.slide-btn:hover{background:var(--navy);color:var(--white)}
+.slide-dots{display:flex;gap:8px;align-items:center}
+.slide-dot{width:6px;height:6px;background:var(--rule);cursor:pointer;transition:background 0.2s,width 0.2s;border:none;padding:0}
+.slide-dot.active{background:var(--pink);width:20px}
+.slide-counter{font-family:'Colfax',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.1em;color:var(--muted);min-width:48px;text-align:center}
+@media(max-width:900px){.slide{padding:32px 24px}.slideshow-controls{padding:0 24px 32px}}
 </style>
 </head>
 <body>
@@ -151,7 +167,7 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 
 <section class="hero">
   <div class="hero-tag">Case Study 03 · Product Execution · 2020–2022</div>
-  <h1 class="hero-title">Extending Braintree<br>to In-Person<br>Payments.</h1>
+  <h1 class="hero-title">Extending Braintree<br>to In-Person<br>Payments</h1>
   <p class="hero-sub">How one designer built Braintree's entire in-person payments product from concept to market, growing the team to three.</p>
   <div class="hero-meta">
     <div class="meta-item"><div class="meta-label">Role</div><div class="meta-value">Lead Product Designer</div></div>
@@ -175,6 +191,26 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
     <div class="stat-desc">From a funded sketch on Verifone hardware to a live, shippable omnichannel payments product.</div>
   </div>
 </div>
+
+
+
+<!-- VIDEO -->
+<div style="background:var(--bg);border-bottom:1px solid var(--rule);padding:48px 64px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border:1px solid var(--rule);box-shadow:0 4px 24px rgba(12,19,34,0.08);">
+      <iframe
+        src="https://www.youtube.com/embed/Ic0VXlvfL-E"
+        title="Braintree In-Person Payments"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</div>
+
 
 <div class="main">
 
@@ -413,4 +449,10 @@ document.querySelectorAll('.nav-link').forEach(function(link){
 <script>
   const sections = document.querySelectorAll('.section');
   const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.targe
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible');
+    }
+  });
+  sections.forEach(s => io.observe(s));
+</script>
+</body>
+</html>
