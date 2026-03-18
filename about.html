@@ -290,13 +290,12 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 
 <div class="about-main">
 
-  <!-- HOW I WORK -->
   <div class="about-section">
     <div class="about-section-grid">
       <div class="about-section-num">01</div>
       <div>
         <div class="section-tag">How I Work</div>
-        <h2>Systems Thinker.<br>Player Coach.</h2>
+        <h2>Systems Thinker<br>Player Coach</h2>
         <p class="lead">I specialize in technically complex systems, and the discipline of making them feel effortless.</p>
         <p>I don't merge technology for technology's sake. I work to understand it deeply, find the real value inside it, and translate that back to every stakeholder: business, engineering, and the end user. User advocacy is non-negotiable, regardless of who's in the room. The most interesting opportunities live in the gaps: the places you only see when you've become enough of an expert to know what's missing.</p>
         <div class="pillars">
@@ -324,20 +323,35 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
         <div class="callout">
           <p>I'm a former front-end developer with a business-minded background as a startup founder and merchant. Being well-rounded isn't a nice-to-have. It's the whole point.</p>
         </div>
-        <h3>On Design Critique</h3>
-        <p>A safe space for open critique is the most valuable thing I can build for a team. When you come to my design review, you leave refreshed, not punished. Design critique should leave people better than it found them. The people outside the design group will challenge us hardest. So I build my team up first, so they can represent design with confidence to the wider org. It starts with them.</p>
       </div>
     </div>
   </div>
 
   <!-- ENTREPRENEURIAL -->
-  <div class="about-section">
+  <!-- DESIGN CRITIQUE -->
+
+  <div class="about-section" style="background:var(--bg);">
     <div class="about-section-grid">
       <div class="about-section-num">02</div>
       <div>
+        <div class="section-tag">Leadership</div>
+        <h2>Running a<br>Design Team</h2>
+        <p>A safe space for open critique is the most valuable thing I can build for a team. When you come to my design review, you leave refreshed, not punished. Design critique should leave people better than it found them. The people outside the design group will challenge us hardest. So I build my team up first, so they can represent design with confidence to the wider org. It starts with them.</p>
+        <img src="clarity.png" alt="Running a Design Team" style="width:100%;height:auto;display:block;margin-top:32px;border-radius:12px;">
+      </div>
+    </div>
+  </div>
+
+<!-- COMPANIES -->
+
+
+  <div class="about-section">
+    <div class="about-section-grid">
+      <div class="about-section-num">03</div>
+      <div>
         <div class="section-tag">Entrepreneurial Background</div>
-        <h2>Built Things<br>That Scaled.</h2>
-        <p class="lead">An entrepreneurial instinct that started at 14 with a website and a band poster has compounded into two acquisitions and a decade of product leadership.</p>
+        <h2>Built Things<br>That Scaled</h2>
+        <p class="lead">An entrepreneurial and DIY instinct that started as a kid building a website for his band has compounded into two acquisitions and a decade of product leadership.</p>
         <p>I loved music just as much as design. But design has sustained me creatively on a daily basis in a way music never quite did. That DIY spirit of building something from nothing has never left.</p>
         <div class="ventures">
           <div class="venture">
@@ -386,10 +400,10 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
   </div>
 
   
-  <!-- COMPANIES -->
+  )
   <div class="about-section">
     <div class="about-section-grid">
-      <div class="about-section-num">03</div>
+      <div class="about-section-num">04</div>
       <div>
         <div class="section-tag">Experience</div>
         <h2>Companies I've<br>Worked With</h2>
@@ -417,12 +431,13 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
   </div>
 
 <!-- HOBBIES -->
+
   <div class="about-section">
     <div class="about-section-grid">
-      <div class="about-section-num">04</div>
+      <div class="about-section-num">05</div>
       <div>
         <div class="section-tag">Outside the Work</div>
-        <h2>Beginner's Mind.<br>Always.</h2>
+        <h2>A Beginner's<br>Mindset</h2>
         <p class="lead">A beginner mindset is a competitive advantage. It's how expertise stays current. I've built a life around staying curious, on and off the bike.</p>
         <div class="hobbies">
           <div class="hobby-card" data-icon="BMX">
@@ -500,4 +515,62 @@ function toggleNav(){
   document.body.style.overflow = links.classList.contains('open') ? 'hidden' : '';
 }
 // Close menu when a link is clicked
-document.querySelectorAll('.nav-link').forEach(function(link)
+document.querySelectorAll('.nav-link').forEach(function(link
+
+
+
+</div>
+
+<div class="closer">
+  <div class="closer-quote">Strategic designer.<br>Principal-level thinker.<br><span class="pink">Based in Chicago.</span></div>
+  <div class="closer-sub">Garrett Galayda · productdesigner.io</div>
+  <a href="https://www.linkedin.com/in/garrettgalayda/" target="_blank" class="closer-btn">Connect on LinkedIn →</a>
+</div>
+
+<a href="casestudies.html" class="next-strip">
+  <div>
+    <div class="next-label">View the Work</div>
+    <div class="next-title">Case Studies</div>
+  </div>
+  <div class="next-arrow">→</div>
+</a>
+
+<footer>
+  <a href="http://productdesigner.io" target="_blank" class="footer-name">productdesigner.io</a>
+  <span class="footer-note">Confidential · For Recruiting Purposes Only</span>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function toggleNav(){
+  var btn = document.getElementById('navHamburger');
+  var links = document.getElementById('navLinks');
+  btn.classList.toggle('open');
+  links.classList.toggle('open');
+  document.body.style.overflow = links.classList.contains('open') ? 'hidden' : '';
+}
+document.querySelectorAll('.nav-link').forEach(function(link){
+  link.addEventListener('click', function(){
+    document.getElementById('navHamburger').classList.remove('open');
+    document.getElementById('navLinks').classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+</script>
+<script>
+  const sections = document.querySelectorAll('.about-section');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.07 });
+  sections.forEach(s => io.observe(s));
+</script>
+<script>
+function toggleNav(){
+  var btn = document.getElementById('navHamburger');
+  var links = document.getElementById('navLinks');
+  btn.classList.toggle('open');
+  links.classList.toggle('open');
+  document.body.style.overflow = links.classList.contains('open') ? 'hidden' : '';
+}
+// Close menu when a link is clicked
+document.querySelectorAll('.nav-link').forEach(function(link
+
