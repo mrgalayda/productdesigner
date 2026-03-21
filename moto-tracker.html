@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Moto Tracker">
+<meta name="theme-color" content="#0f0f0f">
+<title>BMX Moto Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --surface: #1a1a1a;
+    --surface2: #242424;
+    --border: #2e2e2e;
+    --orange: #ef4444;
+    --orange-dim: rgba(239,68,68,0.15);
+    --orange-border: rgba(239,68,68,0.4);
+    --text: #f0f0f0;
+    --text-muted: #888;
+    --text-dim: #555;
+    --green: #22c55e;
+    --green-dim: rgba(34,197,94,0.15);
+    --blue: #3b82f6;
+    --blue-dim: rgba(59,130,246,0.15);
+    --red: #ef4444;
+    --radius: 10px;
+    --radius-lg: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+    overscroll-behavior: none;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 16px 12px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
+  }
+
+  .logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo-dot {
+    width: 10px; height: 10px;
+    background: var(--orange);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .tabs {
+    display: flex;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tab {
+    flex: 1;
+    padding: 14px 8px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .tab.active { color: var(--orange); border-bottom-color: var(--orange); }
+
+  .content { padding: 16px; max-width: 600px; margin: 0 auto; }
+
+  .label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+    margin-top: 20px;
+  }
+  .label:first-child { margin-top: 0; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 14px;
+    margin-bottom: 10px;
+  }
+
+  input[type="text"], select {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    padding: 12px 14px;
+    outline: none;
+    transition: border-color 0.15s;
+    -webkit-appearance: none;
+  }
+  input[type="text"]:focus, select:focus { border-color: var(--orange); }
+  input[type="text"]::placeholder { color: var(--text-dim); }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 38px;
+    cursor: pointer;
+  }
+  select option { background: #1a1a1a; }
+
+  .btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+    white-space: nowrap;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-orange { background: var(--orange); color: #000; }
+  .btn-orange:hover { opacity: 0.9; }
+  .btn-full { width: 100%; margin-top: 10px; }
+
+  .input-row { display: flex; gap: 8px; align-items: stretch; }
+  .input-row input, .input-row select { flex: 1; }
+  .input-row .btn { flex-shrink: 0; }
+  .input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+
+  .pill-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 99px; padding: 6px 10px 6px 13px;
+    font-size: 13px; font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600; letter-spacing: 0.04em; color: var(--text);
+  }
+  .pill-x {
+    background: none; border: none; cursor: pointer;
+    color: var(--text-dim); font-size: 18px; line-height: 1;
+    padding: 0; display: flex; align-items: center; transition: color 0.15s;
+  }
+  .pill-x:hover { color: var(--red); }
+
+  .track-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 12px; background: var(--surface2);
+    border-radius: var(--radius); margin-top: 6px;
+  }
+  .track-item-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 15px; color: var(--text);
+  }
+  .track-item-num { font-size: 12px; color: var(--text-dim); margin-top: 1px; }
+  .track-item-x {
+    background: none; border: none; cursor: pointer;
+    color: var(--text-dim); font-size: 20px; padding: 4px 8px;
+    transition: color 0.15s;
+  }
+  .track-item-x:hover { color: var(--red); }
+
+  .load-row { display: flex; gap: 8px; align-items: stretch; }
+  .load-row select { flex: 1; }
+  .error-msg { font-size: 13px; color: var(--red); margin-top: 8px; display: none; }
+
+  /* ── Event title ── */
+  .event-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 20px; letter-spacing: 0.02em;
+    color: var(--text); margin-bottom: 14px; margin-top: 20px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  }
+
+  /* ── Rider card ── */
+  .rider-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  .rider-card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 16px 12px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+  }
+
+  .rider-card-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 24px; letter-spacing: 0.02em;
+    color: var(--text); line-height: 1;
+  }
+
+  .plate-badge {
+    background: var(--orange-dim);
+    border: 1px solid var(--orange-border);
+    border-radius: 8px; padding: 6px 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 22px; color: var(--orange);
+    letter-spacing: 0.04em; line-height: 1; text-align: center;
+  }
+  .plate-badge.sm { font-size: 16px; padding: 4px 11px; border-radius: 6px; }
+  .plate-label {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--orange); opacity: 0.7;
+    text-align: center; margin-top: 2px;
+  }
+
+  /* ── Class block ── */
+  .class-block {
+    border-top: 1px solid var(--border);
+  }
+  .class-block:first-child { border-top: none; }
+
+  .class-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 16px 10px;
+    background: var(--surface2);
+  }
+
+  .class-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 16px; letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--text);
+  }
+
+  /* ── Moto table ── */
+  .moto-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .moto-table th {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-dim); padding: 7px 16px;
+    text-align: left; border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .moto-table th:not(:first-child),
+  .moto-table td:not(:first-child) { text-align: center; }
+
+  .moto-table td {
+    padding: 11px 16px;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .moto-table tr:last-child td { border-bottom: none; }
+
+  .moto-table tr:hover td { background: var(--surface2); }
+
+  .round-pill {
+    display: inline-block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 99px;
+  }
+  .round-pill.moto { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(59,130,246,0.3); }
+  .round-pill.main { background: var(--green-dim); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+
+  .gate-val {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 17px; letter-spacing: 0.04em;
+    color: var(--text);
+  }
+  .gate-val.main-gate { color: var(--green); }
+
+  .finish-val {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 20px;
+    color: var(--orange);
+  }
+  .finish-dash { color: var(--text-dim); font-size: 14px; }
+
+  .moto-num-val {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600; font-size: 15px; color: var(--text-muted);
+  }
+
+  .riders-val { color: var(--text-muted); font-size: 14px; }
+
+  .empty-state {
+    text-align: center; padding: 40px 20px; color: var(--text-muted);
+  }
+  .empty-state-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.4; }
+  .empty-state-title {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 18px; color: var(--text-muted); margin-bottom: 6px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .empty-state-sub { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+
+  .loading-state {
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; padding: 32px 20px; color: var(--text-muted);
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .spinner {
+    width: 18px; height: 18px;
+    border: 2px solid var(--border); border-top-color: var(--orange);
+    border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .hint {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 10px 12px;
+    font-size: 12px; color: var(--text-dim); margin-top: 10px; line-height: 1.6;
+  }
+  .hint code {
+    font-size: 11px; background: var(--bg);
+    padding: 1px 5px; border-radius: 4px; color: var(--orange);
+  }
+
+  .setup-prompt {
+    background: var(--orange-dim); border: 1px solid var(--orange-border);
+    border-radius: var(--radius-lg); padding: 16px;
+    font-size: 14px; color: var(--orange); line-height: 1.5; margin-bottom: 12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">
+    <span class="logo-dot"></span>
+    BMX Moto Tracker
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-tab="race" onclick="switchTab('race')">Race Day</button>
+  <button class="tab" data-tab="settings" onclick="switchTab('settings')">Settings</button>
+</div>
+
+<!-- RACE DAY -->
+<div id="tab-race" class="content">
+  <div id="setup-prompt" class="setup-prompt" style="display:none;">
+    <b>Get started:</b> Go to Settings to add your riders and your local track numbers.
+  </div>
+  <div class="label">Select track</div>
+  <div class="card" style="margin-bottom:0;">
+    <div class="load-row">
+      <select id="track-select" onchange="clearResults()">
+        <option value="">— choose a track —</option>
+      </select>
+      <button class="btn btn-orange" onclick="loadMotos()">Load</button>
+    </div>
+    <div id="load-error" class="error-msg"></div>
+  </div>
+  <div id="results"></div>
+</div>
+
+<!-- SETTINGS -->
+<div id="tab-settings" class="content" style="display:none;">
+  <div class="label">My riders</div>
+  <div class="card">
+    <div class="input-pair">
+      <input type="text" id="rider-first" placeholder="First name" autocomplete="off" autocorrect="off" autocapitalize="characters" />
+      <input type="text" id="rider-last" placeholder="Last name" autocomplete="off" autocorrect="off" autocapitalize="characters" />
+    </div>
+    <button class="btn btn-orange btn-full" onclick="addRider()">Add rider</button>
+    <div class="pill-list" id="rider-list"></div>
+  </div>
+
+  <div class="label">My tracks</div>
+  <div class="card">
+    <input type="text" id="track-name" placeholder="Track name (e.g. Waukegan BMX)" autocomplete="off" style="margin-bottom:8px;" />
+    <div class="input-row">
+      <input type="text" id="track-num" placeholder="Track number" autocomplete="off" inputmode="numeric" />
+      <button class="btn btn-orange" onclick="addTrack()">Add</button>
+    </div>
+    <div id="track-list"></div>
+    <div class="hint">
+      Find your track number in the USABMX motoboards URL:<br>
+      <code>motoboards.usabmx.com/events/track_<b>1867</b>.json</code>
+    </div>
+  </div>
+</div>
+
+<script>
+let state = { riders: [], tracks: [] };
+
+function loadState() {
+  try { const s = localStorage.getItem('bmx_tracker_v2'); if (s) state = JSON.parse(s); } catch(e) {}
+}
+function saveState() {
+  try { localStorage.setItem('bmx_tracker_v2', JSON.stringify(state)); } catch(e) {}
+}
+
+function switchTab(t) {
+  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+  document.querySelector(`[data-tab="${t}"]`).classList.add('active');
+  document.querySelectorAll('[id^="tab-"]').forEach(el => el.style.display = 'none');
+  document.getElementById('tab-' + t).style.display = '';
+  if (t === 'race') checkSetupPrompt();
+}
+
+function checkSetupPrompt() {
+  document.getElementById('setup-prompt').style.display =
+    (state.riders.length === 0 || state.tracks.length === 0) ? '' : 'none';
+}
+
+/* ── Riders ── */
+function addRider() {
+  const f = document.getElementById('rider-first').value.trim().toUpperCase();
+  const l = document.getElementById('rider-last').value.trim().toUpperCase();
+  if (!f || !l) return;
+  if (state.riders.find(r => r.first === f && r.last === l)) return;
+  state.riders.push({ first: f, last: l });
+  saveState(); renderRiders();
+  document.getElementById('rider-first').value = '';
+  document.getElementById('rider-last').value = '';
+  document.getElementById('rider-first').focus();
+}
+function removeRider(i) { state.riders.splice(i, 1); saveState(); renderRiders(); }
+function renderRiders() {
+  const el = document.getElementById('rider-list');
+  el.innerHTML = state.riders.length === 0
+    ? '<p style="font-size:13px;color:var(--text-dim);margin-top:10px;">No riders saved yet.</p>'
+    : state.riders.map((r, i) =>
+        `<span class="pill">${r.first} ${r.last}<button class="pill-x" onclick="removeRider(${i})">×</button></span>`
+      ).join('');
+}
+
+/* ── Tracks ── */
+function addTrack() {
+  const name = document.getElementById('track-name').value.trim();
+  const num = document.getElementById('track-num').value.trim().replace(/\D/g, '');
+  if (!name || !num) return;
+  if (state.tracks.find(t => t.num === num)) return;
+  state.tracks.push({ name, num });
+  saveState(); renderTracks(); renderTrackSelect();
+  document.getElementById('track-name').value = '';
+  document.getElementById('track-num').value = '';
+}
+function removeTrack(i) { state.tracks.splice(i, 1); saveState(); renderTracks(); renderTrackSelect(); }
+function renderTracks() {
+  const el = document.getElementById('track-list');
+  el.innerHTML = state.tracks.length === 0
+    ? '<p style="font-size:13px;color:var(--text-dim);margin-top:10px;">No tracks saved yet.</p>'
+    : state.tracks.map((t, i) => `
+        <div class="track-item">
+          <div>
+            <div class="track-item-name">${t.name}</div>
+            <div class="track-item-num">Track #${t.num}</div>
+          </div>
+          <button class="track-item-x" onclick="removeTrack(${i})">×</button>
+        </div>`).join('');
+}
+function renderTrackSelect() {
+  const sel = document.getElementById('track-select');
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">— choose a track —</option>' +
+    state.tracks.map(t => `<option value="${t.num}">${t.name}</option>`).join('');
+  if (cur) sel.value = cur;
+}
+
+/* ── Load motos ── */
+function clearResults() {
+  document.getElementById('results').innerHTML = '';
+  document.getElementById('load-error').style.display = 'none';
+}
+
+async function loadMotos() {
+  const num = document.getElementById('track-select').value;
+  const errEl = document.getElementById('load-error');
+  const resultsEl = document.getElementById('results');
+  errEl.style.display = 'none';
+  if (!num) { errEl.textContent = 'Please select a track.'; errEl.style.display = ''; return; }
+  if (state.riders.length === 0) { errEl.textContent = 'Add your riders in Settings first.'; errEl.style.display = ''; return; }
+  resultsEl.innerHTML = `<div class="loading-state"><div class="spinner"></div>Loading motos...</div>`;
+  try {
+    const res = await fetch(`https://motoboards.usabmx.com/events/track_${num}.json`);
+    if (!res.ok) throw new Error('Event data not available yet. Check back closer to race time.');
+    renderResults(await res.json());
+  } catch(e) {
+    resultsEl.innerHTML = '';
+    errEl.textContent = e.message || 'Failed to load. Check your connection and try again.';
+    errEl.style.display = '';
+  }
+}
+
+function renderResults(data) {
+  const resultsEl = document.getElementById('results');
+  const race = Object.values(data.races || {})[0];
+  if (!race) { resultsEl.innerHTML = '<div class="empty-state"><div class="empty-state-title">No race data</div></div>'; return; }
+
+  const motogroups = race.motogroups || {};
+  const ageclasses = race.ageclasses || {};
+
+  // ageclass id -> name
+  const acIdToName = {};
+  Object.entries(ageclasses).forEach(([name, ac]) => { acIdToName[ac.id] = name; });
+
+  // ageclass id -> additional_qualifying_items for total_riders / groups per round
+  const acIdToQualInfo = {};
+  Object.entries(ageclasses).forEach(([name, ac]) => {
+    acIdToQualInfo[ac.id] = ac.additional_qualifying_items || {};
+  });
+
+  // riderMap: "FIRST|LAST" -> { name, classes: [...] }
+  // classMap: "FIRST|LAST|acId" -> { acName, plate, rounds: { moto: {...}, main: {...} } }
+  const riderMap = {};
+  const classMap = {};
+
+  Object.values(motogroups).forEach(mg => {
+    const roundName = Object.keys(mg.round || {})[0] || '';
+    const roundType = roundName === 'Main' ? 'main' : 'moto';
+    const acId = mg.ageclass_id;
+    const acName = acIdToName[acId] || acId;
+
+    // Resolve total_riders and groups from additional_qualifying_items
+    const qualInfo = acIdToQualInfo[acId] || {};
+    const qualKey = roundType === 'main' ? 'MAIN' : (Object.keys(qualInfo).find(k => k !== 'MAIN') || '');
+    const qualData = qualInfo[qualKey] || {};
+    const totalRiders = qualData.total_riders || Object.keys(mg.riders || {}).length;
+    const groups = qualData.groups || 1;
+
+    Object.values(mg.riders || {}).forEach(rider => {
+      const fn = (rider.first_name || '').trim().toUpperCase();
+      const ln = (rider.last_name || '').trim().toUpperCase();
+      if (!state.riders.find(r => r.first === fn && r.last === ln)) return;
+
+      const riderKey = fn + '|' + ln;
+      const classKey = riderKey + '|' + acId;
+
+      if (!classMap[classKey]) {
+        classMap[classKey] = { acName, plate: '', rounds: {} };
+        if (!riderMap[riderKey]) riderMap[riderKey] = { name: fn + ' ' + ln, classes: [] };
+        riderMap[riderKey].classes.push(classMap[classKey]);
+      }
+
+      // Update plate each time (handles per-class plate differences)
+      if (rider.plate_number) classMap[classKey].plate = rider.plate_number;
+
+      const lanes = [rider.lane_1, rider.lane_2, rider.lane_3].filter(l => l && l > 0);
+
+      // Finish: check finish_1 (moto round 1 result)
+      const finish = (rider.finish_1 != null && rider.finish_1 !== '') ? rider.finish_1 : null;
+
+      classMap[classKey].rounds[roundType] = { motoNum: mg.name, lanes, totalRiders, groups, finish };
+    });
+  });
+
+  const riderKeys = Object.keys(riderMap);
+  if (riderKeys.length === 0) {
+    resultsEl.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">🔍</div>
+        <div class="empty-state-title">No riders found</div>
+        <div class="empty-state-sub">None of your saved riders appear in this event.<br>Check that names match exactly in Settings.</div>
+      </div>`;
+    return;
+  }
+
+  const eventName = data.event_name || 'Event';
+  let html = `<div class="event-title">${eventName}</div>`;
+
+  riderKeys.forEach(rk => {
+    const rider = riderMap[rk];
+
+    html += `<div class="rider-card">
+      <div class="rider-card-header">
+        <div class="rider-card-name">${rider.name}</div>
+      </div>`;
+
+    rider.classes.forEach(cls => {
+      const plateBit = cls.plate
+        ? `<div><div class="plate-badge sm">${cls.plate}</div><div class="plate-label">Plate</div></div>`
+        : '';
+
+      html += `<div class="class-block">
+        <div class="class-header">
+          <span class="class-name">${cls.acName}</span>
+          ${plateBit}
+        </div>
+        <table class="moto-table">
+          <thead>
+            <tr>
+              <th>Round</th>
+              <th>Riders</th>
+              <th>Moto</th>
+              <th>Gate</th>
+              <th>Finish</th>
+            </tr>
+          </thead>
+          <tbody>`;
+
+      ['moto', 'main'].forEach(rt => {
+        if (!cls.rounds[rt]) return;
+        const rd = cls.rounds[rt];
+        const gateStr = rd.lanes.join(' ');
+        const ridersStr = `${rd.totalRiders} (${rd.groups})`;
+        const finishHtml = rd.finish != null
+          ? `<span class="finish-val">${rd.finish}</span>`
+          : `<span class="finish-dash">—</span>`;
+
+        html += `<tr>
+          <td><span class="round-pill ${rt}">${rt === 'moto' ? 'Moto' : 'Main'}</span></td>
+          <td><span class="riders-val">${ridersStr}</span></td>
+          <td><span class="moto-num-val">${rd.motoNum}</span></td>
+          <td><span class="gate-val${rt === 'main' ? ' main-gate' : ''}">${gateStr}</span></td>
+          <td>${finishHtml}</td>
+        </tr>`;
+      });
+
+      html += `</tbody></table></div>`;
+    });
+
+    html += `</div>`;
+  });
+
+  resultsEl.innerHTML = html;
+}
+
+/* ── Init ── */
+loadState();
+renderRiders();
+renderTracks();
+renderTrackSelect();
+checkSetupPrompt();
+document.getElementById('rider-last').addEventListener('keydown', e => { if (e.key === 'Enter') addRider(); });
+document.getElementById('track-num').addEventListener('keydown', e => { if (e.key === 'Enter') addTrack(); });
+</script>
+</body>
+</html>
