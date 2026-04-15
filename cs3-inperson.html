@@ -151,6 +151,22 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 @media(max-width:900px){.slide{padding:32px 24px}.slideshow-controls{padding:0 24px 32px}}
 
 .hero-split-left .hero-sub{color:rgba(255,255,255,0.75)}.hero-split-left .meta-value{color:var(--white)}.hero-split-left .hero-tag{background:transparent;color:var(--pink);padding-left:0}
+
+.slideshow-section{background:var(--bg);padding:0;border-bottom:1px solid var(--rule);overflow:hidden}
+.slideshow-inner{max-width:1200px;margin:0 auto}
+.slideshow-track-wrap{overflow:hidden}
+.slideshow-track{display:flex;transition:transform 0.4s ease}
+.slide{flex-shrink:0;width:100%;padding:48px 64px;box-sizing:border-box}
+.slide img{width:100%;height:auto;display:block;border:1px solid var(--rule);box-shadow:0 4px 24px rgba(12,19,34,0.08)}
+.slide-caption{font-family:'Colfax',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-top:16px;text-align:center}
+.slideshow-controls{display:flex;align-items:center;justify-content:center;gap:24px;padding:0 64px 40px}
+.slide-btn{background:none;border:1px solid var(--rule);color:var(--navy);width:40px;height:40px;cursor:pointer;font-family:'Colfax',sans-serif;font-weight:700;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background 0.2s,color 0.2s}
+.slide-btn:hover{background:var(--navy);color:var(--white)}
+.slide-dots{display:flex;gap:6px;align-items:center;flex-wrap:wrap;max-width:300px;justify-content:center}
+.slide-dot{width:6px;height:6px;background:var(--rule);cursor:pointer;transition:background 0.2s,width 0.2s;border:none;padding:0;flex-shrink:0}
+.slide-dot.active{background:var(--pink);width:20px}
+.slide-counter{font-family:'Colfax',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.1em;color:var(--muted);min-width:48px;text-align:center}
+@media(max-width:900px){.slide{padding:32px 24px}.slideshow-controls{padding:0 24px 32px}}
 </style>
 </head>
 <body>
@@ -161,10 +177,10 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
   <div class="nav-links" id="navLinks">
     <a href="casestudies.html" class="nav-link">Case Studies</a>
     <a href="cs1-vas-platform.html" class="nav-link">VAS Platform</a>
-    <a href="cs2-orchestration.html" class="nav-link" style="display:none;">02 — Orchestration Vision</a>
-    <a href="cs3-inperson.html" class="nav-link active" style="display:none;">In-Person Payments</a>
+    <a href="cs2-orchestration.html" class="nav-link" style="display:none;">Orchestration Vision</a>
     <a href="cs4-multilateral.html" class="nav-link">Multilateral</a>
     <a href="cs5-nav-redesign.html" class="nav-link">Navigation Redesign</a>
+    <a href="cs3-inperson.html" class="nav-link active">In-Person Payments</a>
     <a href="about.html" class="nav-link">About</a><a href="https://www.linkedin.com/in/garrettgalayda/" class="nav-link" target="_blank">LinkedIn ↗</a><a href="https://dribbble.com/fireintheattic" class="nav-link" target="_blank">Dribbble ↗</a>
   </div>
 </nav>
@@ -216,6 +232,71 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 </div>
 
 
+<!-- SLIDESHOW -->
+<div class="slideshow-section">
+  <div class="slideshow-inner">
+    <div class="slideshow-track-wrap">
+      <div class="slideshow-track" id="cs3Track">
+        <div class="slide">
+          <img src="images/IN001.jpg" alt="Verifone E285, M400, and P400 terminals showing payment screen">
+          <div class="slide-caption">Payment screen across the full Verifone device family</div>
+        </div>
+        <div class="slide">
+          <img src="images/IN002.jpg" alt="PayPal and Venmo QR checkout flow on Verifone P400">
+          <div class="slide-caption">PayPal &amp; Venmo QR code checkout flow</div>
+        </div>
+        <div class="slide">
+          <img src="images/IN003.jpg" alt="Split tender payment — card insert, authorizing, and partially paid states">
+          <div class="slide-caption">Split tender — card insert, authorization, and partial payment confirmation</div>
+        </div>
+        <div class="slide">
+          <img src="images/IN004.jpg" alt="Hardware lineup wireframes — E285, M400, M400 with printer, P400, and countertop unit">
+          <div class="slide-caption">Hardware lineup — four form factors, one unified design system</div>
+        </div>
+        <div class="slide">
+          <img src="images/IN005.jpg" alt="Terminal onboarding flow — welcome screen, pairing code, and WiFi scanning">
+          <div class="slide-caption">Merchant onboarding — pairing and network setup flow</div>
+        </div>
+        <div class="slide">
+          <img src="images/IN006.jpg" alt="Verifone P400 countertop terminal showing WiFi password entry screen">
+          <div class="slide-caption">WiFi credential entry on the P400 countertop terminal</div>
+        </div>
+        <div class="slide">
+          <img src="images/IN007.jpg" alt="Payment method ecosystem — NFC, PayPal Pay, terminal wireframe, and digital wallet">
+          <div class="slide-caption">Payment method ecosystem — NFC, PayPal Pay, and digital wallet</div>
+        </div>
+        <div class="slide">
+          <img src="images/IN008.jpg" alt="Vineyard Vines pilot — store team and receipt from early merchant test">
+          <div class="slide-caption">Vineyard Vines pilot — one of the first merchant live tests</div>
+        </div>
+        <div class="slide">
+          <img src="images/IN009.jpg" alt="Braintree In-Person developer documentation on GitBook">
+          <div class="slide-caption">Developer documentation — Braintree In-Person API on GitBook</div>
+        </div>
+        <div class="slide">
+          <img src="images/IN010.jpg" alt="Custom prompts flow — merchant loyalty, saved card selection, and payment screen">
+          <div class="slide-caption">Custom prompts — loyalty identification and saved card selection</div>
+        </div>
+        <div class="slide">
+          <img src="images/IN011.jpg" alt="PayPal Gives — charity donation flow concepts on Verifone P400">
+          <div class="slide-caption">PayPal Gives — white-label charity donation at checkout</div>
+        </div>
+        <div class="slide">
+          <img src="images/IN012.jpg" alt="Order tracking entry point — digital receipt and PayPal app package tracking">
+          <div class="slide-caption">Order tracking entry point — receipt to real-time package tracking in PayPal</div>
+        </div>
+      </div>
+    </div>
+    <div class="slideshow-controls">
+      <button class="slide-btn" onclick="cs3Slide(-1)">←</button>
+      <div class="slide-dots" id="cs3Dots">
+      </div>
+      <span class="slide-counter" id="cs3Counter">0 / 0</span>
+      <button class="slide-btn" onclick="cs3Slide(1)">→</button>
+    </div>
+  </div>
+</div>
+
 <div class="main">
 
   <div class="section">
@@ -224,9 +305,9 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
       <div>
         <div class="section-tag">Origin</div>
         <h2>Where It<br>Started</h2>
-        <p class="lead">In 2020, a fellow designer spotted something the rest of the org hadn't: Braintree's ecommerce platform had no answer for the physical world.</p>
+        <p class="lead">In 2020, someone spotted something the rest of the org hadn't: Braintree's ecommerce platform had no answer for the physical world.</p>
         <p>In-person payments account for 80% of all global transactions. And virtually all of them were processed by competing PSPs. A merchant who wanted a true omnichannel experience had to stitch together Braintree for ecommerce and a separate provider like Verifone for in-person. Fragmented, expensive, and an obvious gap.</p>
-        <p>That designer partnered with an engineer, built a demo, and got it funded. What they had was a sketch: a rudimentary payment app running on Verifone hardware. Then I was brought in.</p>
+        <p>A demo was built with an engineer, got it funded, and what existed was a sketch: a rudimentary payment app running on Verifone hardware. That's when I was brought in.</p>
         <div class="callout">
           <p>I didn't start this project. But I'm the reason it shipped.</p>
         </div>
@@ -363,9 +444,39 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
     </div>
   </div>
 
+
   <div class="section">
     <div class="section-grid">
       <div class="section-num">05</div>
+      <div>
+        <div class="section-tag">Hardware</div>
+        <h2>Designing for<br>the Device</h2>
+        <p class="lead">The Verifone terminal came with all of the complexities of a payment acceptance device that sought to accept payments wherever and however the customer so chooses.</p>
+        <p>This wasn't a screen design problem. It was a hardware design problem. The device had to work in a restaurant, a retail store, a pop-up, a stadium concession stand. It had to handle tap, swipe, chip, and PIN. It had to work when the network was slow, when the merchant was distracted, and when the customer had never seen a Braintree-powered terminal before.</p>
+        <p>Every payment method carried its own flow. Every flow had to feel like one product. Chip and PIN required different timing than contactless. Swipe required fallback logic. NFC required trust signals that tap-and-go users hadn't been trained to expect. The device had to be forgiving, fast, and clear — in every configuration, for every merchant type, in every physical environment.</p>
+
+        <div class="two-col" style="margin-top:40px;">
+          <div class="dark-card">
+            <div class="card-tag">The Challenge</div>
+            <div class="card-title">One Device, Every Context</div>
+            <p class="card-text">Tap, swipe, chip, PIN, NFC, and fallback flows — each with distinct timing, trust signals, and error states. All had to feel like a single, coherent product regardless of how the customer chose to pay.</p>
+          </div>
+          <div class="dark-card">
+            <div class="card-tag">The Constraint</div>
+            <div class="card-title">Hardware Limits Design</div>
+            <p class="card-text">Unlike a web product, you can't push a fix. Screen size, processing speed, and input method were fixed. Every design decision had to account for the physical and technical constraints of the terminal itself.</p>
+          </div>
+        </div>
+
+        <p style="margin-top:32px;">Designing for physical hardware also meant designing for the environment around it. Counter height. Lighting. The customer's line of sight. Whether the merchant was watching or had walked away. These aren't considerations that come up in a typical product design brief — but they determined whether the experience felt right or wrong in the real world.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="section">
+    <div class="section-grid">
+      <div class="section-num">06</div>
       <div>
         <div class="section-tag">Candor</div>
         <h2>Constraints &<br>What I'd Do<br>Differently</h2>
@@ -382,7 +493,7 @@ footer{background:var(--bg);border-top:1px solid var(--rule);padding:24px 64px;d
 
   <div class="section">
     <div class="section-grid">
-      <div class="section-num">06</div>
+      <div class="section-num">07</div>
       <div>
         <div class="section-tag">Takeaways</div>
         <h2>What This<br>Demonstrates</h2>
@@ -457,6 +568,26 @@ document.querySelectorAll('.nav-link').forEach(function(link){
     }
   });
   sections.forEach(s => io.observe(s));
+</script>
+<script>
+var cs3Current = 0;
+function cs3Slide(dir) {
+  var track = document.getElementById('cs3Track');
+  var slides = track.querySelectorAll('.slide');
+  var dots = document.getElementById('cs3Dots').querySelectorAll('.slide-dot');
+  var counter = document.getElementById('cs3Counter');
+  if (!slides.length) return;
+  cs3Current = (cs3Current + dir + slides.length) % slides.length;
+  track.style.transform = 'translateX(-' + (cs3Current * 100) + '%)';
+  dots.forEach(function(d, i) { d.classList.toggle('active', i === cs3Current); });
+  counter.textContent = (cs3Current + 1) + ' / ' + slides.length;
+}
+document.addEventListener('DOMContentLoaded', function() {
+  var dots = document.getElementById('cs3Dots');
+  if (dots) dots.querySelectorAll('.slide-dot').forEach(function(dot, i) {
+    dot.addEventListener('click', function() { cs3Slide(i - cs3Current); });
+  });
+});
 </script>
 </body>
 </html>
