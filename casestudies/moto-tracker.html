@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Moto Tracker">
+<meta name="theme-color" content="#0f0f0f">
+<title>BMX Moto Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --surface: #1a1a1a;
+    --surface2: #242424;
+    --border: #2e2e2e;
+    --orange: #ef4444;
+    --orange-dim: rgba(239,68,68,0.15);
+    --orange-border: rgba(239,68,68,0.4);
+    --text: #f0f0f0;
+    --text-muted: #888;
+    --text-dim: #555;
+    --green: #22c55e;
+    --green-dim: rgba(34,197,94,0.15);
+    --blue: #3b82f6;
+    --blue-dim: rgba(59,130,246,0.15);
+    --red: #ef4444;
+    --radius: 10px;
+    --radius-lg: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+    overscroll-behavior: none;
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 16px 12px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 10;
+  }
+
+  .logo {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: 0.02em;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo-dot {
+    width: 10px; height: 10px;
+    background: var(--orange);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .tabs {
+    display: flex;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tab {
+    flex: 1;
+    padding: 14px 8px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .tab.active { color: var(--orange); border-bottom-color: var(--orange); }
+
+  .content { padding: 16px; max-width: 600px; margin: 0 auto; }
+
+  .label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+    margin-top: 20px;
+  }
+  .label:first-child { margin-top: 0; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 14px;
+    margin-bottom: 10px;
+  }
+
+  input[type="text"], select {
+    width: 100%;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    padding: 12px 14px;
+    outline: none;
+    transition: border-color 0.15s;
+    -webkit-appearance: none;
+  }
+  input[type="text"]:focus, select:focus { border-color: var(--orange); }
+  input[type="text"]::placeholder { color: var(--text-dim); }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 38px;
+    cursor: pointer;
+  }
+  select option { background: #1a1a1a; }
+
+  .btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.15s, transform 0.1s;
+    white-space: nowrap;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-orange { background: var(--orange); color: #000; }
+  .btn-orange:hover { opacity: 0.9; }
+  .btn-full { width: 100%; margin-top: 10px; }
+
+  .input-row { display: flex; gap: 8px; align-items: stretch; }
+  .input-row input, .input-row select { flex: 1; }
+  .input-row .btn { flex-shrink: 0; }
+  .input-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+
+  .pill-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 99px; padding: 6px 10px 6px 13px;
+    font-size: 13px; font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600; letter-spacing: 0.04em; color: var(--text);
+  }
+  .pill-x {
+    background: none; border: none; cursor: pointer;
+    color: var(--text-dim); font-size: 18px; line-height: 1;
+    padding: 0; display: flex; align-items: center; transition: color 0.15s;
+  }
+  .pill-x:hover { color: var(--red); }
+
+  .track-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 12px; background: var(--surface2);
+    border-radius: var(--radius); margin-top: 6px;
+  }
+  .track-item-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 15px; color: var(--text);
+  }
+  .track-item-num { font-size: 12px; color: var(--text-dim); margin-top: 1px; }
+  .track-item-x {
+    background: none; border: none; cursor: pointer;
+    color: var(--text-dim); font-size: 20px; padding: 4px 8px;
+    transition: color 0.15s;
+  }
+  .track-item-x:hover { color: var(--red); }
+
+  .load-row { display: flex; gap: 8px; align-items: stretch; }
+  .load-row select { flex: 1; }
+  .error-msg { font-size: 13px; color: var(--red); margin-top: 8px; display: none; }
+
+  /* ── Event title ── */
+  .event-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 20px; letter-spacing: 0.02em;
+    color: var(--text); margin-bottom: 14px; margin-top: 20px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  }
+
+  /* ── Rider card ── */
+  .rider-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  .rider-card-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 16px 12px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
+  }
+
+  .rider-card-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 24px; letter-spacing: 0.02em;
+    color: var(--text); line-height: 1;
+  }
+
+  .plate-badge {
+    background: var(--orange-dim);
+    border: 1px solid var(--orange-border);
+    border-radius: 8px; padding: 6px 14px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 22px; color: var(--orange);
+    letter-spacing: 0.04em; line-height: 1; text-align: center;
+  }
+  .plate-badge.sm { font-size: 16px; padding: 4px 11px; border-radius: 6px; }
+  .plate-label {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--orange); opacity: 0.7;
+    text-align: center; margin-top: 2px;
+  }
+
+  /* ── Class block ── */
+  .class-block {
+    border-top: 1px solid var(--border);
+  }
+  .class-block:first-child { border-top: none; }
+
+  .class-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 16px 10px;
+    background: var(--surface2);
+  }
+
+  .class-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 16px; letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--text);
+  }
+
+  /* ── Moto table ── */
+  .moto-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .moto-table th {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-dim); padding: 7px 16px;
+    text-align: left; border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .moto-table th:not(:first-child),
+  .moto-table td:not(:first-child) { text-align: center; }
+
+  .moto-table td {
+    padding: 11px 16px;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .moto-table tr:last-child td { border-bottom: none; }
+
+  .moto-table tr:hover td { background: var(--surface2); }
+
+  .round-pill {
+    display: inline-block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 3px 10px; border-radius: 99px;
+  }
+  .round-pill.moto { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(59,130,246,0.3); }
+  .round-pill.main { background: var(--green-dim); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+
+  .gate-val {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 17px; letter-spacing: 0.04em;
+    color: var(--text);
+  }
+  .gate-val.main-gate { color: var(--green); }
+
+  .finish-val {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 20px;
+    color: var(--orange);
+  }
+  .finish-dash { color: var(--text-dim); font-size: 14px; }
+
+  .moto-num-val {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600; font-size: 15px; color: var(--text-muted);
+  }
+
+  .riders-val { color: var(--text-muted); font-size: 14px; }
+
+  .track-search-item {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 10px; border-radius: var(--radius); cursor: pointer;
+    transition: background 0.1s;
+  }
+  .track-search-item:hover { background: var(--surface2); }
+  .track-search-item-info { flex: 1; }
+  .track-search-item-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; color: var(--text); }
+  .track-search-item-meta { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
+  .track-search-add {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--orange); background: var(--orange-dim);
+    border: 1px solid var(--orange-border); border-radius: 99px;
+    padding: 3px 10px; cursor: pointer; white-space: nowrap; transition: opacity 0.15s;
+  }
+  .track-search-add:hover { opacity: 0.8; }
+  .track-search-add.saved { color: var(--text-dim); background: var(--surface2); border-color: var(--border); }
+    text-align: center; padding: 40px 20px; color: var(--text-muted);
+  }
+  .empty-state-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.4; }
+  .empty-state-title {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 18px; color: var(--text-muted); margin-bottom: 6px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .empty-state-sub { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+
+  .loading-state {
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; padding: 32px 20px; color: var(--text-muted);
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+    font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase;
+  }
+  .spinner {
+    width: 18px; height: 18px;
+    border: 2px solid var(--border); border-top-color: var(--orange);
+    border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .hint {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 10px 12px;
+    font-size: 12px; color: var(--text-dim); margin-top: 10px; line-height: 1.6;
+  }
+  .hint code {
+    font-size: 11px; background: var(--bg);
+    padding: 1px 5px; border-radius: 4px; color: var(--orange);
+  }
+
+  .setup-prompt {
+    background: var(--orange-dim); border: 1px solid var(--orange-border);
+    border-radius: var(--radius-lg); padding: 16px;
+    font-size: 14px; color: var(--orange); line-height: 1.5; margin-bottom: 12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">
+    <span class="logo-dot"></span>
+    BMX Moto Tracker
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" data-tab="race" onclick="switchTab('race')">Race Day</button>
+  <button class="tab" data-tab="settings" onclick="switchTab('settings')">Settings</button>
+</div>
+
+<!-- RACE DAY -->
+<div id="tab-race" class="content">
+  <div id="setup-prompt" class="setup-prompt" style="display:none;">
+    <b>Get started:</b> Go to Settings to add your riders and your local track numbers.
+  </div>
+  <div class="label">Select track</div>
+  <div class="card" style="margin-bottom:0;">
+    <div class="load-row">
+      <select id="track-select" onchange="clearResults()">
+        <option value="">— choose a track —</option>
+      </select>
+      <button class="btn btn-orange" onclick="loadMotos()">Load</button>
+    </div>
+    <div id="load-error" class="error-msg"></div>
+  </div>
+  <div id="results"></div>
+</div>
+
+<!-- SETTINGS -->
+<div id="tab-settings" class="content" style="display:none;">
+  <div class="label">My riders</div>
+  <div class="card">
+    <div class="input-pair">
+      <input type="text" id="rider-first" placeholder="First name" autocomplete="off" autocorrect="off" autocapitalize="characters" />
+      <input type="text" id="rider-last" placeholder="Last name" autocomplete="off" autocorrect="off" autocapitalize="characters" />
+    </div>
+    <button class="btn btn-orange btn-full" onclick="addRider()">Add rider</button>
+    <div class="pill-list" id="rider-list"></div>
+  </div>
+
+  <div class="label">My tracks</div>
+  <div class="card">
+    <div class="input-row" style="margin-bottom:8px;">
+      <input type="text" id="track-search" placeholder="Search all tracks..." autocomplete="off" autocorrect="off" oninput="renderTrackSearch()" />
+    </div>
+    <div id="track-search-results" style="max-height:200px;overflow-y:auto;margin-bottom:8px;"></div>
+    <div id="track-list"></div>
+  </div>
+</div>
+
+<script>
+let state = { riders: [], tracks: [] };
+
+function loadState() {
+  try { const s = localStorage.getItem('bmx_tracker_v2'); if (s) state = JSON.parse(s); } catch(e) {}
+}
+function saveState() {
+  try { localStorage.setItem('bmx_tracker_v2', JSON.stringify(state)); } catch(e) {}
+}
+
+function switchTab(t) {
+  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+  document.querySelector(`[data-tab="${t}"]`).classList.add('active');
+  document.querySelectorAll('[id^="tab-"]').forEach(el => el.style.display = 'none');
+  document.getElementById('tab-' + t).style.display = '';
+  if (t === 'race') checkSetupPrompt();
+}
+
+function checkSetupPrompt() {
+  document.getElementById('setup-prompt').style.display =
+    (state.riders.length === 0 || state.tracks.length === 0) ? '' : 'none';
+}
+
+/* ── Riders ── */
+function addRider() {
+  const f = document.getElementById('rider-first').value.trim().toUpperCase();
+  const l = document.getElementById('rider-last').value.trim().toUpperCase();
+  if (!f || !l) return;
+  if (state.riders.find(r => r.first === f && r.last === l)) return;
+  state.riders.push({ first: f, last: l });
+  saveState(); renderRiders();
+  document.getElementById('rider-first').value = '';
+  document.getElementById('rider-last').value = '';
+  document.getElementById('rider-first').focus();
+}
+function removeRider(i) { state.riders.splice(i, 1); saveState(); renderRiders(); }
+function renderRiders() {
+  const el = document.getElementById('rider-list');
+  el.innerHTML = state.riders.length === 0
+    ? '<p style="font-size:13px;color:var(--text-dim);margin-top:10px;">No riders saved yet.</p>'
+    : state.riders.map((r, i) =>
+        `<span class="pill">${r.first} ${r.last}<button class="pill-x" onclick="removeRider(${i})">×</button></span>`
+      ).join('');
+}
+
+/* ── All tracks data ── */
+const ALL_TRACKS = [
+  {name:"Chandler BMX",num:"0001"},{name:"Yuma BMX",num:"0009"},{name:"Emerald Valley BMX",num:"0081"},{name:"Cargill Park BMX",num:"0156"},{name:"River Valley (WA) BMX",num:"0115"},{name:"Rad Canyon BMX",num:"0126"},{name:"Umpqua Valley BMX",num:"0130"},{name:"Seatac BMX",num:"0239"},{name:"San Diego BMX",num:"0245"},{name:"Valley BMX",num:"0263"},{name:"Rockford BMX",num:"0442"},{name:"Revolution Bike Park",num:"0740"},{name:"Central Wisconsin BMX",num:"0862"},{name:"Blue Springs BMX",num:"0844"},{name:"Bend BMX",num:"0902"},{name:"Rusty Bowl BMX",num:"0897"},{name:"Boomtown BMX",num:"0987"},{name:"Oak Creek BMX",num:"0962"},{name:"Mike Sedar BMX",num:"1019"},{name:"Gallatin Valley BMX",num:"1030"},{name:"Emery Park BMX",num:"1036"},{name:"Desert Downs BMX",num:"1055"},{name:"Desoto BMX",num:"1069"},{name:"Aberdeen Hub Area BMX",num:"1075"},{name:"Snake River BMX",num:"1076"},{name:"Far North BMX",num:"1108"},{name:"Electric City BMX",num:"1119"},{name:"Marquette BMX",num:"0102"},{name:"Heartland BMX",num:"1116"},{name:"The Hill BMX",num:"1178"},{name:"Whittier Narrows BMX",num:"1202"},{name:"Lakes Area BMX",num:"1213"},{name:"Caldwell BMX",num:"1224"},{name:"St. Peters BMX",num:"1229"},{name:"River City BMX",num:"1259"},{name:"Lincoln Park BMX",num:"1251"},{name:"Nanaimo BMX",num:"1483"},{name:"Greater Victoria BMX",num:"1484"},{name:"Langley BMX",num:"1485"},{name:"Fastrax BMX",num:"1486"},{name:"Pineview Park BMX",num:"1488"},{name:"Rogue Valley BMX",num:"1509"},{name:"Bradley BMX",num:"1510"},{name:"Chehalem Valley BMX",num:"1514"},{name:"Hodag BMX",num:"1517"},{name:"Deseret Peak BMX",num:"1518"},{name:"Columbia Basin BMX",num:"1558"},{name:"Coal Hills BMX",num:"1538"},{name:"Sand Springs BMX",num:"1480"},{name:"Klamath Falls BMX",num:"1471"},{name:"Elkhorn BMX",num:"1473"},{name:"CR BMX",num:"1363"},{name:"Bigfoot BMX",num:"1372"},{name:"Apple Valley BMX Moto Park",num:"1373"},{name:"Imperial Valley BMX",num:"1368"},{name:"River Valley (MN) BMX",num:"1337"},{name:"Lone Star BMX",num:"1346"},{name:"Reno Battleborn BMX",num:"1355"},{name:"Grand Valley BMX",num:"1357"},{name:"Red River BMX",num:"1360"},{name:"Twin Silo BMX",num:"1352"},{name:"Horseheads BMX",num:"1413"},{name:"Faribault BMX",num:"1437"},{name:"Burlington BMX",num:"1441"},{name:"Crow River BMX",num:"1405"},{name:"Raytown BMX",num:"1498"},{name:"Pearland BMX",num:"1531"},{name:"Abbotsford BMX",num:"1526"},{name:"I94 BMX",num:"1302"},{name:"Cobb County BMX",num:"1282"},{name:"Cherry Hill Park BMX",num:"1273"},{name:"Cowtown BMX",num:"1274"},{name:"Kingston Point BMX",num:"1238"},{name:"Carson City BMX",num:"1240"},{name:"Lake Havasu City BMX",num:"1292"},{name:"Capital City (NC) BMX",num:"1296"},{name:"Hornet's Nest BMX",num:"1316"},{name:"Star City BMX",num:"1189"},{name:"Metro BMX",num:"1186"},{name:"Kettering BMX",num:"1268"},{name:"Redwood Empire BMX",num:"1279"},{name:"Mankato Area BMX",num:"0512"},{name:"Cedar BMX",num:"0564"},{name:"Noonday BMX",num:"1575"},{name:"Bellflower BMX",num:"1616"},{name:"Green Lake BMX",num:"1557"},{name:"Razor City BMX",num:"1563"},{name:"Southwest Wyoming Outdoor BMX",num:"1561"},{name:"Imagination Glen BMX",num:"1548"},{name:"Penticton BMX",num:"1662"},{name:"Kelowna BMX",num:"1654"},{name:"Kamloops BMX",num:"1647"},{name:"Columbia River BMX",num:"1641"},{name:"Cape Cod BMX",num:"1640"},{name:"Dacono BMX",num:"1638"},{name:"Cortez BMX",num:"1621"},{name:"Chesapeake BMX",num:"1623"},{name:"Brighton BMX",num:"1614"},{name:"Smith Rock BMX",num:"1610"},{name:"Oceanside BMX",num:"1605"},{name:"Sun City BMX",num:"1593"},{name:"Hanford BMX",num:"1590"},{name:"Durango BMX",num:"1615"},{name:"Grand Forks BMX",num:"1667"},{name:"County Line BMX",num:"1673"},{name:"Colorado River BMX",num:"1672"},{name:"Southern Maryland BMX",num:"1683"},{name:"Ed Fountain Park BMX Raceway",num:"1680"},{name:"Tucson BMX",num:"1676"},{name:"Lancaster BMX",num:"1720"},{name:"North Bay BMX",num:"1721"},{name:"Freedom Park BMX Raceway",num:"1710"},{name:"Moses Lake BMX",num:"1709"},{name:"Supertrak BMX",num:"1695"},{name:"Squamish BMX Racing Track",num:"1746"},{name:"Hamilton BMX",num:"1756"},{name:"Buffalo Creek BMX",num:"1762"},{name:"Spreckels Park BMX",num:"1770"},{name:"Circle City BMX",num:"1773"},{name:"Boulder BMX Inc",num:"1781"},{name:"West Texas BMX",num:"1780"},{name:"Cabot BMX",num:"1783"},{name:"Hampton BMX",num:"1791"},{name:"Ancient City BMX",num:"1793"},{name:"Richfield Park BMX",num:"1799"},{name:"Red Hills BMX",num:"1800"},{name:"Spokane BMX",num:"1801"},{name:"Show Low BMX",num:"1805"},{name:"Interstate BMX",num:"1807"},{name:"Music City BMX Association",num:"1813"},{name:"West Kootenay BMX",num:"1810"},{name:"Eagle Park BMX (ID)",num:"1811"},{name:"Cross Creek BMX",num:"1822"},{name:"Milton BMX",num:"1826"},{name:"Kingston BMX",num:"1825"},{name:"Wolfe Creek BMX",num:"1828"},{name:"Oak Mountain BMX",num:"1830"},{name:"Sarasota BMX",num:"1831"},{name:"Trumbull BMX",num:"1833"},{name:"Johnstown BMX",num:"1835"},{name:"EHT BMX",num:"1841"},{name:"Smoky Mountain BMX",num:"1843"},{name:"Drake Well BMX",num:"1845"},{name:"Shelby Farms BMX",num:"1847"},{name:"Springfield BMX Raceway",num:"1849"},{name:"White Pine BMX",num:"1850"},{name:"Tampa BMX Raceway, Inc.",num:"1851"},{name:"Manzanita Park BMX",num:"1853"},{name:"Johnstown BMX",num:"1835"},{name:"BMX@Shoreham",num:"1839"},{name:"Sandy Ridge BMX",num:"1878"},{name:"Peachtree BMX",num:"1870"},{name:"Trilogy Park BMX",num:"1868"},{name:"Waukegan BMX",num:"1867"},{name:"South Park BMX",num:"1869"},{name:"Charlotte BMX",num:"1876"},{name:"Miami South BMX",num:"1875"},{name:"Grand Traverse County BMX",num:"1873"},{name:"St. Cloud BMX",num:"1874"},{name:"Catamount BMX",num:"1888"},{name:"Akron BMX",num:"1886"},{name:"Midland BMX",num:"1883"},{name:"Okeeheelee BMX",num:"1884"},{name:"Bethel Supercross BMX",num:"1885"},{name:"Westerville BMX",num:"1887"},{name:"Northern Virginia (NOVA) BMX",num:"1891"},{name:"Hunterdon County BMX",num:"1894"},{name:"Woodward Park BMX",num:"1898"},{name:"Hire Park BMX",num:"1897"},{name:"Winchester BMX",num:"1899"},{name:"High Springs BMX",num:"1901"},{name:"Air Time BMX",num:"1902"},{name:"Burdette Park BMX",num:"1903"},{name:"Lexington BMX",num:"1904"},{name:"Falcon BMX",num:"1905"},{name:"Tanglewood BMX",num:"1906"},{name:"Blanchard Woods BMX",num:"1907"},{name:"Waterford Oaks BMX",num:"1908"},{name:"Park City BMX",num:"1909"},{name:"Farmer City BMX",num:"1910"},{name:"CNY BMX",num:"1911"},{name:"South Towns BMX",num:"1913"},{name:"Richmond BMX",num:"1914"},{name:"Naples BMX",num:"1916"},{name:"Can Am BMX",num:"1920"},{name:"East Moline BMX",num:"1921"},{name:"Wakefield BMX",num:"1922"},{name:"Westmoreland BMX",num:"1924"},{name:"VMP BMX",num:"1927"},{name:"Nellis BMX",num:"1929"},{name:"Rock Island Indoor BMX",num:"1936"},{name:"Fernley BMX",num:"1935"},{name:"Wild Chile BMX",num:"1937"},{name:"Grand Prix BMX at SoCal Fair",num:"1946"},{name:"Mile High BMX",num:"1947"},{name:"Rapid City BMX",num:"1948"},{name:"Indy Cycloplex BMX",num:"1952"},{name:"Nepean BMX",num:"1953"},{name:"Pemberton BMX",num:"1956"},{name:"Wee Chi Tah BMX",num:"1965"},{name:"Daytona BMX",num:"1966"},{name:"MadTown BMX",num:"1967"},{name:"Florida State Series",num:"1968"},{name:"Capitol City (TX) BMX",num:"1969"},{name:"HD BMX",num:"1960"},{name:"Sports Park BMX",num:"1959"},{name:"Triple Creek BMX",num:"1961"},{name:"Crown Mountain BMX Park",num:"1964"},{name:"Yucaipa BMX",num:"1975"},{name:"Morgan Hill BMX",num:"2018"},{name:"Whitney Mesa BMX",num:"1982"},{name:"Stouffville BMX",num:"1983"},{name:"Lemoore BMX Raceway",num:"1981"},{name:"East Idaho BMX",num:"2017"},{name:"Antelope BMX",num:"2014"},{name:"Mingus Mountain BMX",num:"2015"},{name:"Marysville BMX",num:"2005"},{name:"Santa Clara Utah BMX",num:"2004"},{name:"Mayes County BMX",num:"2003"},{name:"H Town BMX Supercross Track",num:"2002"},{name:"Hardesty National BMX Stadium",num:"2011"},{name:"Pitsky Park BMX",num:"2020"},{name:"Rockys Creekside BMX",num:"2019"},{name:"Falls BMX Park",num:"1985"},{name:"Cornwall BMX",num:"1991"},{name:"Woodward BMX Track",num:"1999"},{name:"North Shore BMX",num:"1978"},{name:"Fort Wayne BMX",num:"1752"},{name:"Gretna BMX Raceway",num:"1740"},{name:"TRI CITY (NE) BMX",num:"1713"},{name:"Omaha BMX",num:"1734"},{name:"80 35 BMX",num:"1778"},{name:"ORL BMX",num:"1777"},{name:"Woodland BMX",num:"1776"},{name:"Eagle County BMX (CO)",num:"1798"},{name:"Elings Park BMX Raceway",num:"1790"},{name:"Goodyear BMX Raceway",num:"1789"},{name:"Capital City Family (MI) BMX",num:"1537"},{name:"Upstate BMX",num:"1760"},{name:"Rock City BMX",num:"1890"},{name:"Tri City (NY) BMX",num:"1889"},{name:"Columbus BMX",num:"1880"},{name:"Riverside BMX",num:"1881"},{name:"Charlie's BMX Track, Inc.",num:"1872"},{name:"Derby City BMX",num:"1879"},{name:"Fountain City BMX",num:"1859"},{name:"Virgin BMX",num:"1861"},{name:"Foothills BMX",num:"1862"},{name:"Hagerstown BMX",num:"1863"},{name:"New Paltz BMX",num:"1864"},{name:"Central Jersey BMX",num:"1858"},{name:"Mag Ridge BMX Park",num:"1782"},{name:"First State BMX",num:"1385"},{name:"Walla Walla BMX",num:"1390"},{name:"Molalla River BMX",num:"1380"},{name:"Grand Traverse County BMX",num:"1873"},{name:"Spokes BMX",num:"1195"},{name:"Billerica BMX",num:"1625"},{name:"Cape Coral BMX",num:"1871"},{name:"Jacksonville BMX",num:"1896"},{name:"Oldsmar BMX Supercross",num:"1645"},{name:"Rock Hill BMX Supercross Track",num:"1971"},{name:"Whip City BMX",num:"1633"},{name:"Bakerview BMX",num:"1571"},{name:"Yukon BMX",num:"1651"},{name:"Duke City BMX",num:"1046"},{name:"Black Mountain BMX",num:"0257"},{name:"San Diego BMX",num:"0245"},{name:"Desoto BMX",num:"1069"},{name:"Lake Shore BMX",num:"1796"}
+].sort((a, b) => a.name.localeCompare(b.name));
+
+/* ── Favorites (tracks the user has starred) ── */
+function addTrackFavorite(num) {
+  const track = ALL_TRACKS.find(t => t.num === num);
+  if (!track) return;
+  if (state.tracks.find(t => t.num === num)) return;
+  state.tracks.push({ name: track.name, num: track.num });
+  saveState(); renderTracks(); renderTrackSelect(); renderTrackSearch();
+}
+function removeTrack(i) { state.tracks.splice(i, 1); saveState(); renderTracks(); renderTrackSelect(); renderTrackSearch(); }
+
+function renderTracks() {
+  const el = document.getElementById('track-list');
+  if (state.tracks.length === 0) {
+    el.innerHTML = '<p style="font-size:13px;color:var(--text-dim);margin-top:10px;">Search above and tap + to save your tracks.</p>';
+    return;
+  }
+  el.innerHTML = '<div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim);margin:10px 0 6px;">Saved tracks</div>' +
+    state.tracks.map((t, i) => `
+      <div class="track-item">
+        <div>
+          <div class="track-item-name">${t.name}</div>
+          <div class="track-item-num">Track #${t.num}</div>
+        </div>
+        <button class="track-item-x" onclick="removeTrack(${i})">×</button>
+      </div>`).join('');
+}
+
+function renderTrackSearch() {
+  const q = (document.getElementById('track-search').value || '').trim().toLowerCase();
+  const el = document.getElementById('track-search-results');
+  if (!q) { el.innerHTML = ''; return; }
+  const matches = ALL_TRACKS.filter(t =>
+    t.name.toLowerCase().includes(q) || t.num.includes(q)
+  ).slice(0, 12);
+  if (matches.length === 0) {
+    el.innerHTML = '<p style="font-size:13px;color:var(--text-dim);padding:6px 2px;">No tracks found.</p>';
+    return;
+  }
+  el.innerHTML = matches.map(t => {
+    const saved = !!state.tracks.find(s => s.num === t.num);
+    return `<div class="track-search-item">
+      <div class="track-search-item-info">
+        <div class="track-search-item-name">${t.name}</div>
+        <div class="track-search-item-meta">#${t.num}</div>
+      </div>
+      ${saved
+        ? `<span class="track-search-add saved">Saved</span>`
+        : `<button class="track-search-add" onclick="addTrackFavorite('${t.num}')">+ Add</button>`
+      }
+    </div>`;
+  }).join('');
+}
+function renderTrackSelect() {
+  const sel = document.getElementById('track-select');
+  const cur = sel.value;
+  const favNums = new Set(state.tracks.map(t => t.num));
+  const favs = state.tracks;
+  const rest = ALL_TRACKS.filter(t => !favNums.has(t.num));
+
+  let html = '<option value="">— choose a track —</option>';
+  if (favs.length > 0) {
+    html += '<optgroup label="⭐ My Tracks">' +
+      favs.map(t => `<option value="${t.num}">${t.name}</option>`).join('') +
+      '</optgroup>';
+    html += '<optgroup label="All Tracks">' +
+      rest.map(t => `<option value="${t.num}">${t.name}</option>`).join('') +
+      '</optgroup>';
+  } else {
+    html += ALL_TRACKS.map(t => `<option value="${t.num}">${t.name}</option>`).join('');
+  }
+  sel.innerHTML = html;
+  if (cur) sel.value = cur;
+}
+
+/* ── Load motos ── */
+function clearResults() {
+  document.getElementById('results').innerHTML = '';
+  document.getElementById('load-error').style.display = 'none';
+}
+
+async function loadMotos() {
+  const num = document.getElementById('track-select').value;
+  const errEl = document.getElementById('load-error');
+  const resultsEl = document.getElementById('results');
+  errEl.style.display = 'none';
+  if (!num) { errEl.textContent = 'Please select a track.'; errEl.style.display = ''; return; }
+  if (state.riders.length === 0) { errEl.textContent = 'Add your riders in Settings first.'; errEl.style.display = ''; return; }
+  resultsEl.innerHTML = `<div class="loading-state"><div class="spinner"></div>Loading motos...</div>`;
+  try {
+    const res = await fetch(`https://motoboards.usabmx.com/events/track_${num}.json`);
+    if (!res.ok) throw new Error('Event data not available yet. Check back closer to race time.');
+    renderResults(await res.json());
+  } catch(e) {
+    resultsEl.innerHTML = '';
+    errEl.textContent = e.message || 'Failed to load. Check your connection and try again.';
+    errEl.style.display = '';
+  }
+}
+
+function renderResults(data) {
+  const resultsEl = document.getElementById('results');
+  const race = Object.values(data.races || {})[0];
+  if (!race) { resultsEl.innerHTML = '<div class="empty-state"><div class="empty-state-title">No race data</div></div>'; return; }
+
+  const motogroups = race.motogroups || {};
+  const ageclasses = race.ageclasses || {};
+
+  // ageclass id -> name
+  const acIdToName = {};
+  Object.entries(ageclasses).forEach(([name, ac]) => { acIdToName[ac.id] = name; });
+
+  // ageclass id -> additional_qualifying_items for total_riders / groups per round
+  const acIdToQualInfo = {};
+  Object.entries(ageclasses).forEach(([name, ac]) => {
+    acIdToQualInfo[ac.id] = ac.additional_qualifying_items || {};
+  });
+
+  // riderMap: "FIRST|LAST" -> { name, classes: [...] }
+  // classMap: "FIRST|LAST|acId" -> { acName, plate, rounds: { moto: {...}, main: {...} } }
+  const riderMap = {};
+  const classMap = {};
+
+  Object.values(motogroups).forEach(mg => {
+    const roundName = Object.keys(mg.round || {})[0] || '';
+    const roundType = roundName === 'Main' ? 'main' : 'moto';
+    const acId = mg.ageclass_id;
+    const acName = acIdToName[acId] || acId;
+
+    // Resolve total_riders and groups from additional_qualifying_items
+    const qualInfo = acIdToQualInfo[acId] || {};
+    const qualKey = roundType === 'main' ? 'MAIN' : (Object.keys(qualInfo).find(k => k !== 'MAIN') || '');
+    const qualData = qualInfo[qualKey] || {};
+    const totalRiders = qualData.total_riders || Object.keys(mg.riders || {}).length;
+    const groups = qualData.groups || 1;
+
+    Object.values(mg.riders || {}).forEach(rider => {
+      const fn = (rider.first_name || '').trim().toUpperCase();
+      const ln = (rider.last_name || '').trim().toUpperCase();
+      if (!state.riders.find(r => r.first === fn && r.last === ln)) return;
+
+      const riderKey = fn + '|' + ln;
+      const classKey = riderKey + '|' + acId;
+
+      if (!classMap[classKey]) {
+        classMap[classKey] = { acName, plate: '', rounds: {} };
+        if (!riderMap[riderKey]) riderMap[riderKey] = { name: fn + ' ' + ln, classes: [] };
+        riderMap[riderKey].classes.push(classMap[classKey]);
+      }
+
+      // Update plate each time (handles per-class plate differences)
+      if (rider.plate_number) classMap[classKey].plate = rider.plate_number;
+
+      const lanes = [rider.lane_1, rider.lane_2, rider.lane_3].filter(l => l && l > 0);
+
+      // Finish: check finish_1 (moto round 1 result)
+      const finish = (rider.finish_1 != null && rider.finish_1 !== '') ? rider.finish_1 : null;
+
+      classMap[classKey].rounds[roundType] = { motoNum: mg.name, lanes, totalRiders, groups, finish };
+    });
+  });
+
+  const riderKeys = Object.keys(riderMap);
+  if (riderKeys.length === 0) {
+    resultsEl.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">🔍</div>
+        <div class="empty-state-title">No riders found</div>
+        <div class="empty-state-sub">None of your saved riders appear in this event.<br>Check that names match exactly in Settings.</div>
+      </div>`;
+    return;
+  }
+
+  const eventName = data.event_name || 'Event';
+  let html = `<div class="event-title">${eventName}</div>`;
+
+  riderKeys.forEach(rk => {
+    const rider = riderMap[rk];
+
+    html += `<div class="rider-card">
+      <div class="rider-card-header">
+        <div class="rider-card-name">${rider.name}</div>
+      </div>`;
+
+    rider.classes.forEach(cls => {
+      const plateBit = cls.plate
+        ? `<div><div class="plate-badge sm">${cls.plate}</div><div class="plate-label">Plate</div></div>`
+        : '';
+
+      html += `<div class="class-block">
+        <div class="class-header">
+          <span class="class-name">${cls.acName}</span>
+          ${plateBit}
+        </div>
+        <table class="moto-table">
+          <thead>
+            <tr>
+              <th>Round</th>
+              <th>Riders</th>
+              <th>Moto</th>
+              <th>Gate</th>
+              <th>Finish</th>
+            </tr>
+          </thead>
+          <tbody>`;
+
+      ['moto', 'main'].forEach(rt => {
+        if (!cls.rounds[rt]) return;
+        const rd = cls.rounds[rt];
+        const gateStr = rd.lanes.join(' ');
+        const ridersStr = `${rd.totalRiders} (${rd.groups})`;
+        const finishHtml = rd.finish != null
+          ? `<span class="finish-val">${rd.finish}</span>`
+          : `<span class="finish-dash">—</span>`;
+
+        html += `<tr>
+          <td><span class="round-pill ${rt}">${rt === 'moto' ? 'Moto' : 'Main'}</span></td>
+          <td><span class="riders-val">${ridersStr}</span></td>
+          <td><span class="moto-num-val">${rd.motoNum}</span></td>
+          <td><span class="gate-val${rt === 'main' ? ' main-gate' : ''}">${gateStr}</span></td>
+          <td>${finishHtml}</td>
+        </tr>`;
+      });
+
+      html += `</tbody></table></div>`;
+    });
+
+    html += `</div>`;
+  });
+
+  resultsEl.innerHTML = html;
+}
+
+/* ── Init ── */
+loadState();
+renderRiders();
+renderTracks();
+renderTrackSelect();
+checkSetupPrompt();
+document.getElementById('rider-last').addEventListener('keydown', e => { if (e.key === 'Enter') addRider(); });
+</script>
+</body>
+</html>
